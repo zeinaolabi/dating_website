@@ -1,6 +1,20 @@
+const openSignin = document.getElementById("open_signin");
+const openSignup = document.getElementById("open_signup");
+const signinModal = document.getElementById("signin_container");
+const signupModal = document.getElementById("signup_container");
 const year = document.getElementById('year');
 const month = document.getElementById('month');
 const day = document.getElementById('day');
+
+openSignin.onclick = () =>{
+    signinModal.style.display = "flex";
+    signupModal.style.display = "none";
+}
+
+openSignup.onclick = () =>{
+    signupModal.style.display = "flex";
+    signinModal.style.display = "none";
+}
 
 //Create a year drop down menu
 const yearDropdown = () => {

@@ -162,6 +162,14 @@ input::placeholder{
     display: none;
 }
 
+#signin_container img{
+    margin-top: 15vh;
+}
+
+#signin_container .pink_btn{
+    margin-top: 5vh;
+}
+
 .image_container{
     width: 50%;
     height: 100%;
