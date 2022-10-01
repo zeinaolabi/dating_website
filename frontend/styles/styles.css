@@ -186,6 +186,61 @@ input::placeholder{
 }
 /*End of Login page design*/
 
+/*Start of main page design*/
+.vl {
+    border-left: 1px solid rgb(58, 58, 58);
+    height: 100vh;
+}
+
+.profile_container{
+    width: 20%;
+    height: 100%;
+    background-color: rgb(252, 241, 243);
+}
+
+.profile_content{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile_info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6vh; 
+}
+
+.profile_info > h2{
+    margin-top: 1vh;
+    margin-bottom: 0.5vh;
+}
+
+.editprofile{
+    margin-top: 3vh;
+}
+
+.logout{
+    font-size: 24px;
+    margin-bottom: 3vh; 
+}
+
+.profile_picture{
+    width: 13.5vw;
+    height: 22vh;
+    border-radius: 50%;
+    border: 2px solid rgb(250, 217, 223);
+    box-shadow: 3px 3px 8px rgb(250, 217, 223);
+}
+
+.profile_picture:hover{
+    box-shadow: 3px 3px 8px rgb(249, 198, 207);
+}
+
 @media screen and (max-width: 800px) {
     .main_container{
         flex-direction: column;
