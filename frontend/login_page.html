@@ -20,7 +20,7 @@
                 <input type="text" class="textfield" id="password" placeholder="Password">
 
                 <button class="pink_btn">Login</button>
-                <span>Don't have an account? <button class="transparent_btn">Sign up!</button></span>
+                <span>Don't have an account? <button id="open_signup" class="transparent_btn">Sign up!</button></span>
             </div>
         </div>
         <!--End of sign in container-->
@@ -43,13 +43,12 @@
 
                 <div class="radio_buttons">
                     <span>Gender:</span>
-                    <input type="radio" id="male" name="male" value="Male">
-                    <label for="male">Male</label><br>
-                    <input type="radio" id="female" name="female" value="Female">
-                    <label for="female">CSS</Female><br>
+                    <label for="male"><input type="radio" id="male" name="gender" value="Male">Male</label>
+                    <label for="female"><input type="radio" id="female" name="gender" value="Female">Female</label><br>
                 </div>
 
                 <div class="radio_buttons">
+                    <span>Interested in:</span>
                     <input type="checkbox" id="female" name="female" value="Female">
                     <label for="female">Female</label><br>
                     <input type="checkbox" id="male" name="male" value="Male">
@@ -58,18 +57,21 @@
                     <label for="both">Both</label><br>
                 </div>
 
-                <button>Click here to save your location</button>
+                <div class="location">
+                    <span>Location: <p class="demo"></p></span>
+                    <button class="location_btn">Save your location</button>
+                </div>
 
-                <p id="demo"></p>
-
-                <button class="pink_btn">Login</button>
-                <span>Already have an account? <button class="transparent_btn">Sign in!</button></span>
+                <button class="pink_btn login_btn">Login</button>
+                <span>Already have an account? <button id="open_signin" class="transparent_btn">Sign in!</button></span>
             </div>
         </div>
         <!--End of sign up container-->
 
         <div class="image_container">
-            <img src="styles/images//hearts.png">
+            <h1>Cupidie!</h1>
+            <h2>Engage your dating life, one swipe at a time.</h2>
+            <img src="styles/images//couple.png">
         </div>
     </div>
     <!--End of main container-->
