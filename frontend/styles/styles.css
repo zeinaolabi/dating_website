@@ -2,3 +2,113 @@
     margin: 0;
     padding: 0;
 }
+
+body{
+    box-sizing: border-box;
+}
+
+/*Start of Login page design*/
+.main_container{
+    background-image: linear-gradient(to right, pink , rgb(254, 223, 228),rgb(251, 235, 238),rgb(252, 221, 226),rgb(255, 178, 191),rgb(250, 141, 159));
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.sign_container{
+    width: 45%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign_content{
+    width: 70%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    background-color: white;
+    color: #8B9CB7;
+}
+
+.sign_content > img{
+    margin-top: 8vh;
+}
+
+.sign_content > h1{
+    margin-bottom: 1vh;
+}
+
+.textfield{
+    width: 80%;
+    height: 7%;
+    outline: none;
+    border: 1px solid #8B9CB7;
+    border-radius: 5px;
+    color:rgb(253, 144, 162);
+    margin: 1vh 0;
+    padding-left: 1vw;
+}
+
+input::placeholder{
+    color:rgb(255, 221, 227);
+    font-weight: 600;
+}
+
+.year{
+    width: 45%;
+    padding: 1.5vh 1vw;
+    border: 1px solid #8B9CB7;
+    border-radius: 5px;
+    color:rgb(255, 201, 211);
+    outline: rgb(253, 144, 162);
+
+}
+
+.month{
+    width: 30%;
+    padding: 1.5vh 1vw;
+    border: 1px solid #8B9CB7;
+    border-radius: 5px;
+    color:rgb(255, 201, 211);
+    outline: rgb(253, 144, 162);
+}
+
+.day{
+    width: 20%;
+    padding: 1.5vh 1vw;
+    border: 1px solid #8B9CB7;
+    border-radius: 5px;
+    color:rgb(255, 201, 211);
+    outline: rgb(253, 144, 162);
+}
+
+.dropdown{
+    display: flex;
+    flex-direction: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 83.5%;
+    outline: none;
+}
+
+#signin_container{
+    display: none;
+}
+
+.image_container{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image_container > img{
+    width: 35%;
+    height: 30%;
+}
+/*End of Login page design*/
