@@ -7,6 +7,42 @@
     <title>Login</title>
 </head>
 <body>
+
+    <div class="main_container">
+        <div class="signin_container">
+            <h1>Login</h1>
+            <input type="text" class="text_field" id="email" placeholder="Email">
+            <input type="text" class="text_field" id="password" placeholder="Password">
+
+            <button class="pink_btn">Login</button>
+            <span>Don't have an account? <button class="transparent_btn">Sign up!</button></span>
+        </div>
+
+        <div class="signup_container">
+            <h1>Sign up</h1>
+            <input type="text" class="text_field" id="name" placeholder="Name">
+            <input type="text" class="text_field" id="email" placeholder="Email">
+            <input type="text" class="text_field" id="password" placeholder="Password">
+
+            <div class="radio_buttons">
+                <span>Gender:</span>
+                <input type="radio" id="male" name="male" value="Male">
+                <label for="male">Male</label><br>
+                <input type="radio" id="female" name="female" value="Female">
+                <label for="female">CSS</Female><br>
+            </div>
+
+            <div class="radio_buttons">
+                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                <label for="vehicle1"> I have a bike</label><br>
+                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                <label for="vehicle2"> I have a car</label><br>
+                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                <label for="vehicle3"> I have a boat</label><br>
+            </div>
+
+        </div>
+    </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
 </body>
