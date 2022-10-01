@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Main Page</title>
+</head>
+<body>
+
+    <div class="main_container">
+        <div class="profile_container">
+            <div class="profile_content">
+                <div class="profile_info">
+                    <label><input type="file" id="myfile" name="myfile" hidden>
+                        <img class="profile_picture" src="styles/images/cupid.png"></label>
+                    <h2 id="name">Mikasa</h2>
+                    <p id="bio">EREEEEEN</p>
+    
+                    <button class="pink_btn editprofile">Edit profile</button>
+                </div>
+                
+                <div>
+                    <button class="transparent_btn logout">Log out</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="vl"></div>
+
+        <div class="dating_container">
+            <header>
+                <ul>
+                    <li><button class="transparent_btn">Favorites</button></li>
+                    <li><button class="transparent_btn">Chat</button></li>
+                </ul>
+            </header>
+
+            <h1 class="title">Your Favorites!</h1>
+
+            <div class="matches_container">
+                <div class="match">
+                    <img src="styles/images/cupid.png">
+                    <div class="match_info">
+                        <h3 id="match_name">Levi</h3>
+                        <p id="match_bio">Biooo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="js/main_script.js"></script>
+</body>
+</html>
