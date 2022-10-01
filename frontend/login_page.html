@@ -8,8 +8,10 @@
 </head>
 <body>
 
+    <!--Start of main container-->
     <div class="main_container">
-        <div class="signin_container">
+        <!--Start of sign in container-->
+        <div class="sign_container" id="signin_container">
             <h1>Login</h1>
             <input type="text" class="text_field" id="email" placeholder="Email">
             <input type="text" class="text_field" id="password" placeholder="Password">
@@ -17,12 +19,21 @@
             <button class="pink_btn">Login</button>
             <span>Don't have an account? <button class="transparent_btn">Sign up!</button></span>
         </div>
+        <!--End of sign in container-->
 
-        <div class="signup_container">
+        <!--Start of sign up container-->
+        <div class="sign_container" id="signup_container">
             <h1>Sign up</h1>
             <input type="text" class="text_field" id="name" placeholder="Name">
             <input type="text" class="text_field" id="email" placeholder="Email">
             <input type="text" class="text_field" id="password" placeholder="Password">
+
+            <!--Drop down menus to be added on JS-->
+            <div class="dropdown">
+                <select class="year" id="year"></select>
+                <select class="month" id="month"></select>
+                <select class="day" id="day"></select>
+            </div>
 
             <div class="radio_buttons">
                 <span>Gender:</span>
@@ -33,17 +44,26 @@
             </div>
 
             <div class="radio_buttons">
-                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                <label for="vehicle1"> I have a bike</label><br>
-                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-                <label for="vehicle2"> I have a car</label><br>
-                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-                <label for="vehicle3"> I have a boat</label><br>
+                <input type="checkbox" id="female" name="female" value="Female">
+                <label for="female">Female</label><br>
+                <input type="checkbox" id="male" name="male" value="Male">
+                <label for="male">Male</label><br>
+                <input type="checkbox" id="both" name="both" value="Both">
+                <label for="both">Both</label><br>
             </div>
 
+            <button>Click here to save your location</button>
+
+            <p id="demo"></p>
+
+            <button class="pink_btn">Login</button>
+            <span>Already have an account? <button class="transparent_btn">Sign in!</button></span>
         </div>
+        <!--End of sign up container-->
     </div>
+    <!--End of main container-->
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="login_script.js"></script>
 </body>
 </html>
