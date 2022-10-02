@@ -359,7 +359,7 @@ input::placeholder{
     padding: 20px;
     border: 1px solid #888;
     width: 32%;
-    height: 55%;
+    height: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -389,6 +389,96 @@ input::placeholder{
     align-content: space-between;
     width: 85%;
     margin-bottom: 2vh;
+}
+
+.bio{
+    height: 20%;
+}
+
+.invisibility_mode{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.visibility_btn{
+    background-color: rgb(173, 23, 48);
+    color:white;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 1vh 1.5vw;
+    width: 40%;
+}
+
+.match_content{
+    background-color: #fefefe;
+    margin: 8% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    height: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.col{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.match_info{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.match_info > img{
+    width: 50%;
+    height: 100%;
+}
+
+.match_details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.match_actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.match_actions > button{
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.match_actions > button > img{
+    width: 15%;
+    padding-right: 5px;
+}
+
+.match_bio{
+    margin-top: 1vh;
 }
 
 @media screen and (max-width: 800px) {

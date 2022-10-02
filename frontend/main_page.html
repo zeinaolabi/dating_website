@@ -41,7 +41,7 @@
             <h1 class="title">Your matches!</h1>
 
             <div class="matches_container">
-                <div class="match">
+                <div class="match" id="open_match_modal">
                     <img src="styles/images/cupid.png">
                     <div class="match_info">
                         <h3 id="match_name">Another name</h3>
@@ -109,15 +109,20 @@
 
     <!--Start of edit profile modal-->
     <div id="edit_profile_modal" class="modal">
-        <!-- Modal content -->
         <div class="modal_content">
             <div class="edit_header">
                 <h1>Edit profile</h1>
                 <span id="close" class="close">&times;</span>
             </div>
             <input type="text" class="textfield" id="name" placeholder="Name">
-             <input type="text" class="textfield" id="email" placeholder="Email">
-            <input type="text" class="textfield" id="password" placeholder="Password">
+            <input type="text" class="textfield bio" id="bio" placeholder="Bio">
+
+            <!--Drop down menus to be added on JS-->
+            <div class="dropdown">
+                <select class="year" id="year"></select>
+                <select class="month" id="month"></select>
+                <select class="day" id="day"></select>
+            </div>
 
             <div class="radio_buttons">
                 <span>Interested in:</span>
@@ -131,12 +136,48 @@
                 <button class="location_btn">Save your location</button>
             </div>
 
-            <button class="pink_btn login_btn">Login</button>
+            <div class="invisibility_mode">
+                <p>Visibility: <span id="visibility">ON</span></p>
+                <button class="pink_btn visibility_btn">Change visibility</button>
+            </div>
+
+            <button class="pink_btn login_btn">Edit</button>
         </div>
     </div>
     <!--End of edit profile modal-->
+
+    <!--Start of match profile modal-->
+    <div id="match_modal" class="modal">
+        <div class="match_content">
+            <div class="col">
+                <div class="edit_header">
+                    <h1>Match Info</h1>
+                    <span id="close2" class="close">&times;</span>
+                </div>
+    
+                <div class="match_info">
+                    <img src="styles/images/cupid.png">
+
+                    <div class="match_details">
+                        <div>
+                            <h2>Name</h2>
+                            <p><span id="match_age">Age</span></p>
+                            <p class="match_bio" id="match_bio">Bio</p>
+                        </div>
+
+                        <div class="match_actions">
+                            <button class="pink_btn">Message</button>
+                            <button class="transparent_btn"><img src="styles/images/heart.png">Add to favorites</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End of match profile modal-->
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="js/dropdown_menus.js"></script>
     <script src="js/main_script.js"></script>
 </body>
 </html>
