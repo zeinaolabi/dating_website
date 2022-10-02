@@ -10,7 +10,7 @@ body{
 
 /*Start of Login page design*/
 .main_container{
-    background-image: linear-gradient(to right, pink , rgb(254, 223, 228),rgb(251, 235, 238),rgb(252, 221, 226),rgb(255, 178, 191),rgb(250, 141, 159));
+    background-image: white;
     display: flex;
     flex-direction: row;
     height: 100vh;
@@ -31,9 +31,10 @@ body{
     flex-direction: column;
     align-items: center;
     border-radius: 20px;
-    background-color: white;
-    color: #8B9CB7;
-    box-shadow: 4px 4px 10px rgb(252, 205, 211);
+    background-color: rgb(255, 214, 220);
+    color: rgb(61, 61, 61);
+    border: 1px solid rgb(180, 108, 120);
+    box-shadow: 2px 2px 8px rgb(180, 108, 120);
 }
 
 .sign_content > img{
@@ -110,16 +111,16 @@ input::placeholder{
     background-color: transparent;
     outline: none;
     border: none;
-    color:rgb(250, 141, 159);
+    color:rgb(173, 23, 48);
     font-weight: bold;
 }
 
 .transparent_btn:hover{
-    color: rgb(252, 110, 134);
+    color: rgb(132, 17, 36);
 }
 
 .location_btn{
-    background-color: rgb(250, 141, 159);
+    background-color: rgb(173, 23, 48);
     color:white;
     outline: none;
     border: none;
@@ -130,7 +131,7 @@ input::placeholder{
 }
 
 .pink_btn{
-    background-color: rgb(250, 141, 159);
+    background-color: rgb(173, 23, 48);
     color:white;
     outline: none;
     border: none;
@@ -142,7 +143,7 @@ input::placeholder{
 }
 
 .pink_btn:hover, .location_btn:hover{
-    background-color: rgb(247, 116, 138);
+    background-color: rgb(132, 17, 36);
 }
 
 .login_btn{
@@ -188,14 +189,15 @@ input::placeholder{
 
 /*Start of main page design*/
 .vl {
-    border-left: 1px solid rgb(210, 210, 210);
+    border-left: 1px solid rgb(30, 30, 30);
     height: 100vh;
 }
 
 .profile_container{
     width: 20%;
     height: 100%;
-    background-color: rgb(252, 241, 243);
+    background-color: rgb(61, 61, 61);
+    color: white;
 }
 
 .profile_content{
@@ -212,7 +214,11 @@ input::placeholder{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 8vh; 
+    margin-top: 2vh; 
+}
+
+.profile_info > h1{
+    margin-bottom: 3vh;
 }
 
 .profile_info > h2{
@@ -233,12 +239,11 @@ input::placeholder{
     width: 13.5vw;
     height: 22vh;
     border-radius: 50%;
-    border: 2px solid rgb(250, 217, 223);
-    box-shadow: 3px 3px 8px rgb(250, 217, 223);
+    border: 2px solid rgb(173, 23, 48);
 }
 
 .profile_picture:hover{
-    box-shadow: 3px 3px 8px rgb(249, 198, 207);
+    box-shadow: 2px 2px 8px rgb(180, 46, 68);
 }
 
 .dating_container{
@@ -248,7 +253,7 @@ input::placeholder{
 
 .dating_container header{
     width: 100%;
-    background-color: rgb(247, 116, 138);
+    background-color: rgb(173, 23, 48);
     height: 75px;
 }
 
@@ -275,11 +280,11 @@ input::placeholder{
 }
 
 .dating_container header ul li .transparent_btn:hover{
-    color: rgb(252, 110, 134);
+    color: rgb(173, 23, 48);
 }
 
 .dating_container header ul li:hover{
-    background-color: #FDDFE4;
+    background-color: white;
 }
 
 .title{
@@ -290,17 +295,25 @@ input::placeholder{
 
 .matches_container{
     width: 100%;
-    height: 100%;
+    height: 85%;
     margin: 2vh 2vw;
     overflow: scroll;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .match{
-    width: 300px;
+    width: 280px;
     height: 350px;
     background-color: white;
     border-radius: 20px;
-    box-shadow: 2px 2px 6px rgb(249, 198, 207);
+    border: 1px solid rgb(227, 227, 227);
+    box-shadow: 3px 3px 6px rgb(227, 227, 227);
+    margin-right: 2vw;
+    margin-bottom: 2vh;
 }
 
 .match:hover{
@@ -308,7 +321,7 @@ input::placeholder{
 }
 
 .match img{
-    width: 300px;
+    width: 280px;
     height: 280px;
     border-radius: 20px;
     border-end-end-radius: 0px;
@@ -321,6 +334,61 @@ input::placeholder{
 
 .match_info p{
     font-size: 14px;
+}
+
+/*End of main page design*/
+
+/*Start of edit page modal*/
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+  
+.modal_content {
+    background-color: #fefefe;
+    margin: 8% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 32%;
+    height: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+  
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.edit_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: space-between;
+    align-content: space-between;
+    width: 85%;
+    margin-bottom: 2vh;
 }
 
 @media screen and (max-width: 800px) {

@@ -13,12 +13,13 @@
         <div class="profile_container">
             <div class="profile_content">
                 <div class="profile_info">
+                    <h1>Cupidie!</h1>
                     <label><input type="file" id="myfile" name="myfile" hidden>
                         <img class="profile_picture" src="styles/images/cupid.png"></label>
-                    <h2 id="name">Mikasa</h2>
-                    <p id="bio">EREEEEEN</p>
+                    <h2 id="name">Name</h2>
+                    <p id="bio">Bio</p>
     
-                    <button class="pink_btn editprofile">Edit profile</button>
+                    <button id="open_edit_modal" class="pink_btn editprofile">Edit profile</button>
                 </div>
                 
                 <div>
@@ -43,13 +44,97 @@
                 <div class="match">
                     <img src="styles/images/cupid.png">
                     <div class="match_info">
-                        <h3 id="match_name">Levi</h3>
+                        <h3 id="match_name">Another name</h3>
+                        <p id="match_bio">Biooo</p>
+                    </div>
+                </div>
+
+                <div class="match">
+                    <img src="styles/images/cupid.png">
+                    <div class="match_info">
+                        <h3 id="match_name">Another name</h3>
+                        <p id="match_bio">Biooo</p>
+                    </div>
+                </div>
+
+                <div class="match">
+                    <img src="styles/images/cupid.png">
+                    <div class="match_info">
+                        <h3 id="match_name">Another name</h3>
+                        <p id="match_bio">Biooo</p>
+                    </div>
+                </div>
+
+                <div class="match">
+                    <img src="styles/images/cupid.png">
+                    <div class="match_info">
+                        <h3 id="match_name">Another name</h3>
+                        <p id="match_bio">Biooo</p>
+                    </div>
+                </div>
+                <div class="match">
+                    <img src="styles/images/cupid.png">
+                    <div class="match_info">
+                        <h3 id="match_name">Another name</h3>
+                        <p id="match_bio">Biooo</p>
+                    </div>
+                </div> <div class="match">
+                    <img src="styles/images/cupid.png">
+                    <div class="match_info">
+                        <h3 id="match_name">Another name</h3>
+                        <p id="match_bio">Biooo</p>
+                    </div>
+                </div> <div class="match">
+                    <img src="styles/images/cupid.png">
+                    <div class="match_info">
+                        <h3 id="match_name">Another name</h3>
+                        <p id="match_bio">Biooo</p>
+                    </div>
+                </div> <div class="match">
+                    <img src="styles/images/cupid.png">
+                    <div class="match_info">
+                        <h3 id="match_name">Another name</h3>
+                        <p id="match_bio">Biooo</p>
+                    </div>
+                </div> <div class="match">
+                    <img src="styles/images/cupid.png">
+                    <div class="match_info">
+                        <h3 id="match_name">Another name</h3>
                         <p id="match_bio">Biooo</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!--Start of edit profile modal-->
+    <div id="edit_profile_modal" class="modal">
+        <!-- Modal content -->
+        <div class="modal_content">
+            <div class="edit_header">
+                <h1>Edit profile</h1>
+                <span id="close" class="close">&times;</span>
+            </div>
+            <input type="text" class="textfield" id="name" placeholder="Name">
+             <input type="text" class="textfield" id="email" placeholder="Email">
+            <input type="text" class="textfield" id="password" placeholder="Password">
+
+            <div class="radio_buttons">
+                <span>Interested in:</span>
+                <label><input type="checkbox" id="female" value="Female">Female</label><br>
+                <label><input type="checkbox" id="male" value="Male">Male</label><br>
+                <label for="both"><input type="checkbox" id="both" name="both" value="Both">Both</label><br>
+            </div>
+
+            <div class="location">
+                <span>Location: <p class="demo"></p></span>
+                <button class="location_btn">Save your location</button>
+            </div>
+
+            <button class="pink_btn login_btn">Login</button>
+        </div>
+    </div>
+    <!--End of edit profile modal-->
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="js/main_script.js"></script>
