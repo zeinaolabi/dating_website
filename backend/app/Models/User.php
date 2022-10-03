@@ -63,7 +63,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Message::class, "sender_id");
     }
 
-    public function Action(){
+    public function Favorite(){
+        return $this->belongsToMany(Action::class, 'actions');
+    }
+
+    public function Block(){
         return $this->belongsToMany(Action::class, 'actions');
     }
 }
