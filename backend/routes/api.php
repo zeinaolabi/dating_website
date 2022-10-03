@@ -26,6 +26,9 @@ Route::group([
     Route::post('/send_message', [actionsController::class, 'sendMessage']);
     Route::get('/get_chatted_with/{id}', [actionsController::class, 'getChattedUsers']);
     Route::get('/get_chat/{id}/{match_id}', [actionsController::class, 'getChat']);
+    Route::get('/is_favored/{id}/{match_id}', [actionsController::class, 'isFavored']);
+    Route::post('/add_to_favorites', [actionsController::class, 'addToFav']);
+    Route::post('/remove_from_favorites', [actionsController::class, 'removeFromFav']);
 
 
 });

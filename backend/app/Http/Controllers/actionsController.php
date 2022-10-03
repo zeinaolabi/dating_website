@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Action;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class actionsController extends Controller
         }
 
         $user = Message::create($validator->validated());
-        
+
         return response()->json([
             'status' => 'Message sent',
         ], 201);
@@ -41,6 +42,25 @@ class actionsController extends Controller
 
     function getChat($id, $match_id){
         $chats = Message::select("message", "messages.created_at")->
+        where([
+            ['sender_id', '=', $id],
+            ['receiver_id', '=', $match_id],
+        ])->
+        orWhere([
+            ['sender_id', '=', $id],
+            ['receiver_id', '=', $match_id],
+        ])->
+        orderBy('created_at', 'asc')->
+        get();
+
+        return response()->json([
+            "status" => "Success",
+            "data" => $chats
+        ]);
+    }
+
+    function isFavored($id, $match_id){
+        $chats = Action::select("message", "messages.created_at")->
         where([
             ['sender_id', '=', $id],
             ['receiver_id', '=', $match_id],
