@@ -29,6 +29,8 @@ Route::group([
     Route::get('/is_favored/{id}/{match_id}', [actionsController::class, 'isFavored']);
     Route::post('/add_to_favorites', [actionsController::class, 'addToFav']);
     Route::post('/remove_from_favorites', [actionsController::class, 'removeFromFav']);
+    Route::post('/block', [actionsController::class, 'block']);
+    Route::post('/unblock', [actionsController::class, 'unblock']);
 
 
 });

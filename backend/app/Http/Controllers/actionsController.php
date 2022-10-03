@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Action;
+use App\Models\Block;
 use App\Models\Favorite;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Validator;
 
 class actionsController extends Controller
@@ -116,5 +116,34 @@ class actionsController extends Controller
             ], 400);
         }
     }
+
+    function block(Request $request){
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'blockeduser_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $isBlocked = Block::where([
+            ['user_id', '=', $request->user_id],
+            ['blockeduser_id', '=', $request->blockeduser_id],
+        ])->get();
+
+        if(!$isBlocked->isEmpty()){
+            return response()->json([
+                'status' => 'User Already Blocked',
+            ], 400);
+        }
+
+        Block::create($validator->validated());
+
+        return response()->json([
+            'status' => 'User Block',
+        ], 201);
+    }
+
 
 }
