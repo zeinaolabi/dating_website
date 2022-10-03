@@ -69,10 +69,28 @@ class actionsController extends Controller
         get();
 
         return response()->json([
-            "status" => "Success",
-            "data" => $isFavored->isEmpty()
+            "isLiked" => !$isFavored->isEmpty()
         ]);
     }
+
+    function addToFav(Request $request){
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'favoreduser_id' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $query = Favorite::create($validator->validated());
+        
+        return response()->json([
+            'status' => 'Added to Favorites',
+        ], 201);
+    }
+
+
 
 
 }
