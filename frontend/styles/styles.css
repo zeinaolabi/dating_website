@@ -437,16 +437,17 @@ input::placeholder{
     align-items: center;
 }
 
-.match_info{
+.match_modal_info{
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 100%;
 }
 
-.match_info > img{
+.match_modal_info > img{
     width: 50%;
     height: 100%;
+    border-end-start-radius: 20px;
 }
 
 .match_details{
@@ -454,6 +455,7 @@ input::placeholder{
     flex-direction: column;
     justify-content: space-between;
     width: 50%;
+    margin-left: 1vw;
 }
 
 .match_actions{
@@ -479,6 +481,13 @@ input::placeholder{
 
 .match_bio{
     margin-top: 1vh;
+}
+
+.error{
+    color:rgb(198, 27, 55);
+    font-size: 16px;
+    margin-top: 1vh;
+    font-weight: bold;
 }
 
 @media screen and (max-width: 800px) {
