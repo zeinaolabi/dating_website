@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Action;
+use App\Models\Favorite;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -60,21 +61,16 @@ class actionsController extends Controller
     }
 
     function isFavored($id, $match_id){
-        $chats = Action::select("message", "messages.created_at")->
+        $isFavored = Favorite::select("*")->
         where([
-            ['sender_id', '=', $id],
-            ['receiver_id', '=', $match_id],
+            ['user_id', '=', $id],
+            ['favoreduser_id', '=', $match_id],
         ])->
-        orWhere([
-            ['sender_id', '=', $id],
-            ['receiver_id', '=', $match_id],
-        ])->
-        orderBy('created_at', 'asc')->
         get();
 
         return response()->json([
             "status" => "Success",
-            "data" => $chats
+            "data" => $isFavored->isEmpty()
         ]);
     }
 
