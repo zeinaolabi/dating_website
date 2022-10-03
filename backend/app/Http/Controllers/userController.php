@@ -11,11 +11,11 @@ use Validator;
 class userController extends Controller
 {
     function getMatches($id){
-        //Get IDs of blocked users
+        //Get IDs of blocked &invisible users
         $blockedUsers = Block::where('user_id',$id)->pluck('blockeduser_id');
         $invisibleUsers = User::where("visibility","=",0)->get();
 
-        //Get all favorite users that are not blocked
+        //Get all users that are not blocked/invisible
         $matches = User::select("*")->
         where('id', '<>', $id)->
         whereNotIn('users.id',$blockedUsers)->
