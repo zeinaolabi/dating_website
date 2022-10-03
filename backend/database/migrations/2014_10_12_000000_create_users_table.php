@@ -22,8 +22,7 @@ class CreateUsersTable extends Migration
             $table->integer("age");
             $table->string("gender");
             $table->string("location");
-            $table->binary("visibility")->default('1');
-            $table->rememberToken();
+            $table->integer("visibility")->default('1');
             $table->timestamps();
         });
     }
