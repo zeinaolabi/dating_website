@@ -141,7 +141,7 @@ class actionsController extends Controller
         Block::create($validator->validated());
 
         return response()->json([
-            'status' => 'User Block',
+            'status' => 'User Blocked',
         ], 201);
     }
 

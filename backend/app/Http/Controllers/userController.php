@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Block;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -23,5 +24,20 @@ class userController extends Controller
         }
 
         return response()->json($match, 201);
+    }
+
+    function getBlocked($id){
+        $blockedUsers = User::select("*")->
+            join("blocks", "users.id", "=", "blockeduser_id")->
+        where("user_id", "=", $id)->get();
+
+        if($blockedUsers->isEmpty()){
+            return response()->json([
+                'status' => "Error",
+                'message' => "No blocked Users"
+            ], 400);
+        }
+
+        return response()->json($blockedUsers, 201);
     }
 }
