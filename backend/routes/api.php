@@ -23,6 +23,7 @@ Route::group([
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/send_message', [actionsController::class, 'sendMessage']);
     Route::get('/get_chatted_with/{id}', [actionsController::class, 'getChattedUsers']);
     Route::get('/get_chat/{id}/{match_id}', [actionsController::class, 'getChat']);
 

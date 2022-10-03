@@ -6,9 +6,28 @@ use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class actionsController extends Controller
 {
+    function sendMessage(Request $request){
+        $validator = Validator::make($request->all(), [
+            'sender_id' => 'required',
+            'receiver_id' => 'required',
+            'message' => 'required|string|max:150',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $user = Message::create($validator->validated());
+        
+        return response()->json([
+            'status' => 'Message sent',
+        ], 201);
+    }
+
     function getChattedUsers($id){
         $chattedUsers = User::select("users.id", "name")->
         join("messages", "receiver_id", "=", "users.id")->
