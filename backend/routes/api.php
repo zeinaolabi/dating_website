@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\actionsController;
+use App\Http\Controllers\userController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -31,6 +32,10 @@ Route::group([
     Route::post('/remove_from_favorites', [actionsController::class, 'removeFromFav']);
     Route::post('/block', [actionsController::class, 'block']);
     Route::post('/unblock', [actionsController::class, 'unblock']);
+
+    Route::get('/get_matches/{id}', [userController::class, 'getMatches']);
+    Route::get('/get_match/{match_id}', [userController::class, 'getMatch']);
+
 
 
 });
