@@ -55,4 +55,41 @@ class userController extends Controller
 
         return response()->json($favUsers, 201);
     }
+
+    function getProfileInfo($id){
+        $profileInfo = User::select("*")->
+        where("id", "=", $id)->get();
+
+        if($profileInfo->isEmpty()){
+            return response()->json([
+                'status' => "Error",
+                'message' => "No blocked Users"
+            ], 400);
+        }
+
+        return response()->json($profileInfo, 201);
+    }
+
+    function updateProfile(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => 'string|between:2,100',
+            'bio' => 'string|max:150',
+            'age' => 'string',
+            'location' => 'string',
+            'visibility' => 'integer'
+        ]);
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $user = User::create(array_merge(
+            $validator->validated()));
+
+        auth()->login($user);
+
+        return response()->json([
+            'message' => 'User successfully registered',
+            'user' => $user
+        ], 201);
+    }
 }

@@ -37,6 +37,9 @@ Route::group([
     Route::get('/get_match/{match_id}', [userController::class, 'getMatch']);
     Route::get('/get_blocked/{id}', [userController::class, 'getBlocked']);
     Route::get('/get_favorites/{id}', [userController::class, 'getFavorite']);
+    Route::get('/get_profile_info/{id}', [userController::class, 'getProfileInfo']);
+    Route::post('/update_profile', [userController::class, 'updateProfile']);
+
 });
 
 
