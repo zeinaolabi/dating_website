@@ -79,18 +79,42 @@ class actionsController extends Controller
             'favoreduser_id' => 'required',
         ]);
 
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
         }
 
-        $query = Favorite::create($validator->validated());
-        
+        Favorite::create($validator->validated());
+
         return response()->json([
             'status' => 'Added to Favorites',
         ], 201);
     }
 
+    function removeFromFav(Request $request){
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|integer',
+            'favoreduser_id' => 'required|integer',
+        ]);
 
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
 
+        $test = Favorite::where([
+            ['user_id', '=', $request->user_id],
+            ['favoreduser_id', '=', $request->favoreduser_id],
+        ])->delete();
+
+        if($test == 0){
+            return response()->json([
+                'status' => 'User not in Favorites',
+            ], 201);
+        }
+        else{
+            return response()->json([
+                'status' => 'Removed from Favorites',
+            ], 400);
+        }
+    }
 
 }
