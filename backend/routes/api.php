@@ -36,9 +36,7 @@ Route::group([
     Route::get('/get_matches/{id}', [userController::class, 'getMatches']);
     Route::get('/get_match/{match_id}', [userController::class, 'getMatch']);
     Route::get('/get_blocked/{id}', [userController::class, 'getBlocked']);
-
-
-
+    Route::get('/get_favorites/{id}', [userController::class, 'getFavorite']);
 });
 
 

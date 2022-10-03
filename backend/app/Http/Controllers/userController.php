@@ -40,4 +40,19 @@ class userController extends Controller
 
         return response()->json($blockedUsers, 201);
     }
+
+    function getFavorite($id){
+        $favUsers = User::select("*")->
+        join("favorites", "users.id", "=", "favoreduser_id")->
+        where("user_id", "=", $id)->get();
+
+        if($favUsers->isEmpty()){
+            return response()->json([
+                'status' => "Error",
+                'message' => "No blocked Users"
+            ], 400);
+        }
+
+        return response()->json($favUsers, 201);
+    }
 }
