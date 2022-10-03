@@ -145,5 +145,30 @@ class actionsController extends Controller
         ], 201);
     }
 
+    function unblock(Request $request){
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|integer',
+            'blockeduser_id' => 'required|integer',
+        ]);
 
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        $isBlocked = Block::where([
+            ['user_id', '=', $request->user_id],
+            ['blockeduser_id', '=', $request->blockeduser_id],
+        ])->delete();
+
+        if($isBlocked == 0){
+            return response()->json([
+                'status' => 'User not Blocked',
+            ], 201);
+        }
+        else{
+            return response()->json([
+                'status' => 'User Unblocked',
+            ], 400);
+        }
+    }
 }
