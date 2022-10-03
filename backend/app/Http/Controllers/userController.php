@@ -10,8 +10,27 @@ use Validator;
 
 class userController extends Controller
 {
-    function getMatches(){
+    function getMatches($id){
+        //Get IDs of blocked users
+        $blockedUsers = Block::where('user_id',$id)->pluck('blockeduser_id');
+        $invisibleUsers = User::where("visibility","=",0)->get();
 
+        //Get all favorite users that are not blocked
+        $matches = User::select("*")->
+        where('id', '<>', $id)->
+        whereNotIn('users.id',$blockedUsers)->
+        whereNotIn('users.id', $invisibleUsers)->get();
+
+        //If no results were returned, display an error
+        if($matches->isEmpty()){
+            return response()->json([
+                'status' => "Error",
+                'message' => "No Matches"
+            ], 400);
+        }
+
+        //Send back a json response with the result
+        return response()->json($matches, 201);
     }
 
     function getMatch($match_id){
@@ -52,11 +71,13 @@ class userController extends Controller
     function getFavorite($id){
         //Get IDs of blocked users
         $blockedUsers = Block::where('user_id',$id)->pluck('blockeduser_id');
+        $invisibleUsers = User::where("visibility","=",0)->get();
 
         //Get all favorite users that are not blocked
         $favUsers = User::select("*")->
         join("favorites", "users.id", "=", "favoreduser_id")->
         whereNotIn('users.id',$blockedUsers)->
+        whereNotIn('users.id', $invisibleUsers)->
         where("favorites.user_id", "=", $id)->get();
 
         //If no results were returned, display an error
@@ -83,6 +104,8 @@ class userController extends Controller
                 'message' => "No blocked Users"
             ], 400);
         }
+
+        $profileInfo->image =  base64_encode($profileInfo->image);
 
         //Send back a json respone with the result
         return response()->json($profileInfo, 201);
@@ -128,7 +151,7 @@ class userController extends Controller
         //Get the image and save it in a folder
         if($request->hasFile('image')){
             $destination_path = "public/images";
-            $image = $request->file('image');
+            $image = base64_decode($request->file('image'));
             $imageName = $image->getClientOriginalName();
             $request->file('image')->storeAs($destination_path, $imageName);
 

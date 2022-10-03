@@ -21,9 +21,6 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function () {
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/send_message', [actionsController::class, 'sendMessage']);
     Route::get('/get_chatted_with/{id}', [actionsController::class, 'getChattedUsers']);
     Route::get('/get_chat/{id}/{match_id}', [actionsController::class, 'getChat']);
@@ -41,6 +38,10 @@ Route::group([
     Route::post('/update_profile', [userController::class, 'updateProfile']);
 
 });
+
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

@@ -35,6 +35,17 @@ class actionsController extends Controller
             ], 400);
         }
 
+        $isBlocked = Block::where(
+            ['sender_id', '=', $request->sender_id],
+            ['receiver_id', '=', $request->receiver_id]
+        )->get();
+
+        if(!$isBlocked->isEmpty()){
+            return response()->json([
+                'status' => "Can't Message a Blocked User",
+            ], 400);
+        }
+
         //Create a new message
         Message::create($validator->validated());
 
