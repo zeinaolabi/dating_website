@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Block;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Validator;
 
 class userController extends Controller
 {
@@ -72,24 +73,52 @@ class userController extends Controller
 
     function updateProfile(Request $request){
         $validator = Validator::make($request->all(), [
+            'id' => 'required|integer',
             'name' => 'string|between:2,100',
             'bio' => 'string|max:150',
-            'age' => 'string',
+            'age' => 'integer',
             'location' => 'string',
-            'visibility' => 'integer'
+            'visibility' => 'integer',
+            'interested_in' => 'integer',
+            'image' => 'string'
         ]);
+
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $user = User::create(array_merge(
-            $validator->validated()));
+        $profile = User::find($request->id);
 
-        auth()->login($user);
+        if($profile == null){
+            return response()->json([
+                'message' => 'No Such User',
+            ], 400);
+        }
+
+        $profile->name = $request->name != null ? $request->name : $profile->name;
+        $profile->bio = $request->bio != null ? $request->bio : $profile->bio;
+        $profile->age = $request->age != null ? $request->age : $profile->age;
+        $profile->location = $request->location != null ? $request->location : $profile->location;
+        $profile->visibility = $request->visibility != null ? $request->visibility : $profile->visibility;
+
+        if($request->hasFile('image')){
+            $destination_path = "public/images";
+            $image = $request->file('image');
+            $imageName = $image->getClientOriginalName();
+            $request->file('image')->storeAs($destination_path, $imageName);
+
+            $profile->image = $imageName;
+        }
+
+        if(!$profile->save()){
+            return response()->json([
+                'message' => 'Unsuccessful Editing',
+            ], 400);
+        }
 
         return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user
+            'message' => 'Successfully Edited',
+            'user' => $profile
         ], 201);
     }
 }
