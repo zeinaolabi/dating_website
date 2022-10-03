@@ -2,3 +2,502 @@
     margin: 0;
     padding: 0;
 }
+
+body{
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/*Start of Login page design*/
+.main_container{
+    background-image: white;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.sign_container{
+    width: 45%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign_content{
+    width: 70%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    background-color: rgb(255, 214, 220);
+    color: rgb(61, 61, 61);
+    border: 1px solid rgb(180, 108, 120);
+    box-shadow: 2px 2px 8px rgb(180, 108, 120);
+}
+
+.sign_content > img{
+    margin-top: 4vh;
+}
+
+.sign_content > h1{
+    margin-bottom: 1vh;
+}
+
+.textfield{
+    width: 80%;
+    height: 7%;
+    outline: none;
+    border: 1px solid #8B9CB7;
+    border-radius: 5px;
+    color:#621B07;
+    margin: 1vh 0;
+    padding-left: 1vw;
+}
+
+input::placeholder{
+    color:rgb(255, 221, 227);
+    font-weight: 600;
+}
+
+.year{
+    width: 45%;
+    padding: 1.5vh 1vw;
+    border: 1px solid #8B9CB7;
+    border-radius: 5px;
+    color:rgb(255, 201, 211);
+    outline: rgb(253, 144, 162);
+}
+
+.month{
+    width: 30%;
+    padding: 1.5vh 1vw;
+    border: 1px solid #8B9CB7;
+    border-radius: 5px;
+    color:rgb(255, 201, 211);
+    outline: rgb(253, 144, 162);
+}
+
+.day{
+    width: 20%;
+    padding: 1.5vh 1vw;
+    border: 1px solid #8B9CB7;
+    border-radius: 5px;
+    color:rgb(255, 201, 211);
+    outline: rgb(253, 144, 162);
+}
+
+.dropdown{
+    display: flex;
+    flex-direction: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 83.5%;
+    outline: none;
+    margin: 1vh 0;
+}
+
+.radio_buttons{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    accent-color: #621B07;
+    margin: 1vh 0;
+}
+
+.transparent_btn{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color:rgb(173, 23, 48);
+    font-weight: bold;
+}
+
+.transparent_btn:hover{
+    color: rgb(132, 17, 36);
+}
+
+.location_btn{
+    background-color: rgb(173, 23, 48);
+    color:white;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 1vh 1.5vw;
+    width: 40%;
+}
+
+.pink_btn{
+    background-color: rgb(173, 23, 48);
+    color:white;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 1.5vh 2vw;
+    width: 50%;
+    margin: 1vh 0;
+}
+
+.pink_btn:hover, .location_btn:hover{
+    background-color: rgb(132, 17, 36);
+}
+
+.login_btn{
+    margin-top: 3vh
+}
+
+.location{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1vh 0;
+}
+
+#signin_container{
+    display: none;
+}
+
+#signin_container img{
+    margin-top: 15vh;
+}
+
+#signin_container .pink_btn{
+    margin-top: 5vh;
+}
+
+.image_container{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #621B07;
+}
+
+.image_container > img{
+    width: 100%;
+    height: 70%;
+}
+/*End of Login page design*/
+
+/*Start of main page design*/
+.vl {
+    border-left: 1px solid rgb(30, 30, 30);
+    height: 100vh;
+}
+
+.profile_container{
+    width: 20%;
+    height: 100%;
+    background-color: rgb(61, 61, 61);
+    color: white;
+}
+
+.profile_content{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile_info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vh; 
+}
+
+.profile_info > h1{
+    margin-bottom: 3vh;
+}
+
+.profile_info > h2{
+    margin-top: 1vh;
+    margin-bottom: 0.5vh;
+}
+
+.editprofile{
+    margin-top: 3vh;
+}
+
+.logout{
+    font-size: 24px;
+    margin-bottom: 3vh; 
+}
+
+.profile_picture{
+    width: 13.5vw;
+    height: 22vh;
+    border-radius: 50%;
+    border: 2px solid rgb(173, 23, 48);
+}
+
+.profile_picture:hover{
+    box-shadow: 2px 2px 8px rgb(180, 46, 68);
+}
+
+.dating_container{
+    width: 80%;
+    height: 100%;
+}
+
+.dating_container header{
+    width: 100%;
+    background-color: rgb(173, 23, 48);
+    height: 75px;
+}
+
+.dating_container header ul{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.dating_container header ul li{
+    height: 100%;
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.dating_container header ul li .transparent_btn{
+    color: white;
+    width: 100%;
+    height: 100%;
+}
+
+.dating_container header ul li .transparent_btn:hover{
+    color: rgb(173, 23, 48);
+}
+
+.dating_container header ul li:hover{
+    background-color: white;
+}
+
+.title{
+    text-align: center;
+    color: rgb(225, 52, 81);
+    margin-top: 1vh;
+}
+
+.matches_container{
+    width: 100%;
+    height: 85%;
+    margin: 2vh 2vw;
+    overflow: scroll;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.match{
+    width: 280px;
+    height: 350px;
+    background-color: white;
+    border-radius: 20px;
+    border: 1px solid rgb(227, 227, 227);
+    box-shadow: 3px 3px 6px rgb(227, 227, 227);
+    margin-right: 2vw;
+    margin-bottom: 2vh;
+}
+
+.match:hover{
+    box-shadow: 5px 5px 10px rgb(249, 198, 207);
+}
+
+.match img{
+    width: 280px;
+    height: 280px;
+    border-radius: 20px;
+    border-end-end-radius: 0px;
+    border-end-start-radius: 0px;
+}
+
+.match_info{
+    padding-left: 1vw;
+}
+
+.match_info p{
+    font-size: 14px;
+}
+
+/*End of main page design*/
+
+/*Start of edit page modal*/
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+  
+.modal_content {
+    background-color: #fefefe;
+    margin: 8% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 32%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+  
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.edit_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: space-between;
+    align-content: space-between;
+    width: 85%;
+    margin-bottom: 2vh;
+}
+
+.bio{
+    height: 20%;
+}
+
+.invisibility_mode{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.visibility_btn{
+    background-color: rgb(173, 23, 48);
+    color:white;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 1vh 1.5vw;
+    width: 40%;
+}
+
+.match_content{
+    background-color: #fefefe;
+    margin: 8% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    height: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.col{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.match_info{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.match_info > img{
+    width: 50%;
+    height: 100%;
+}
+
+.match_details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.match_actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.match_actions > button{
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.match_actions > button > img{
+    width: 15%;
+    padding-right: 5px;
+}
+
+.match_bio{
+    margin-top: 1vh;
+}
+
+@media screen and (max-width: 800px) {
+    .main_container{
+        flex-direction: column;
+    }
+
+    .sign_container{
+        width: 100%;
+        height: 100%;
+        font-size: 12px;
+    }
+
+    .sign_content{
+        height: 90%;
+        width: 90%;
+    }
+
+    .image_container{
+        display: none;
+    }
+}

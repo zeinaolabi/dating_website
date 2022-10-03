@@ -4,10 +4,77 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
     <title>Login</title>
 </head>
 <body>
+
+    <!--Start of main container-->
+    <div class="main_container">
+        <!--Start of sign in container-->
+        <div class="sign_container" id="signin_container">
+            <div class="sign_content">
+                <img src="styles/images/cupid.png">
+                <h1>Login</h1>
+                <input type="text" class="textfield" id="email" placeholder="Email">
+                <input type="text" class="textfield" id="password" placeholder="Password">
+
+                <button class="pink_btn">Login</button>
+                <span>Don't have an account? <button id="open_signup" class="transparent_btn">Sign up!</button></span>
+            </div>
+        </div>
+        <!--End of sign in container-->
+
+        <!--Start of sign up container-->
+        <div class="sign_container" id="signup_container">
+            <div class="sign_content">
+                <img src="styles/images/cupid.png">
+                <h1>Sign up</h1>
+                <input type="text" class="textfield" id="name" placeholder="Name">
+                <input type="text" class="textfield" id="email" placeholder="Email">
+                <input type="text" class="textfield" id="password" placeholder="Password">
+
+                <!--Drop down menus to be added on JS-->
+                <div class="dropdown">
+                    <select class="year" id="year"></select>
+                    <select class="month" id="month"></select>
+                    <select class="day" id="day"></select>
+                </div>
+
+                <div class="radio_buttons">
+                    <span>Gender:</span>
+                    <label for="male"><input type="radio" id="male" name="gender" value="Male">Male</label>
+                    <label for="female"><input type="radio" id="female" name="gender" value="Female">Female</label><br>
+                </div>
+
+                <div class="radio_buttons">
+                    <span>Interested in:</span>
+                    <label><input type="checkbox" id="female" value="Female">Female</label><br>
+                    <label><input type="checkbox" id="male" value="Male">Male</label><br>
+                    <label for="both"><input type="checkbox" id="both" name="both" value="Both">Both</label><br>
+                </div>
+
+                <div class="location">
+                    <span>Location: <p class="demo"></p></span>
+                    <button class="location_btn">Save your location</button>
+                </div>
+
+                <button class="pink_btn login_btn">Login</button>
+                <span>Already have an account? <button id="open_signin" class="transparent_btn">Sign in!</button></span>
+            </div>
+        </div>
+        <!--End of sign up container-->
+
+        <div class="image_container">
+            <h1>Cupidie!</h1>
+            <h2>Engage your dating life, one swipe at a time.</h2>
+            <img src="styles/images//couple.png">
+        </div>
+    </div>
+    <!--End of main container-->
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="js/dropdown_menus.js"></script>
+    <script src="js/login_script.js"></script>
 </body>
 </html>
