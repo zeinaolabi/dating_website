@@ -563,9 +563,41 @@ input::placeholder{
 
 .chat{
     width: 70%;
-    height: 100%;
+    height: 85%;
     background-color: rgb(223, 221, 221);
     overflow: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.messages{
+    display: flex;
+    flex-direction: column;
+}
+
+.message{
+    display: none;
+    width: 50%;
+    margin-left: auto;
+    background-color: rgb(242, 242, 242);
+    min-height: 5vh;
+    border-radius: 20px;
+    align-content: center;
+    justify-content: center;
+    margin: 5px;
+    padding: 0 10px;
+}
+
+.message_content{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 10px;
+}
+
+.darker{
+    margin-left: auto;
+    background-color: rgb(234, 234, 234);
 }
 
 .send_message{
@@ -594,6 +626,7 @@ input::placeholder{
     width: 100%;
     height: 100%;
 }
+
 /*End of Chat design*/
 
 @media screen and (max-width: 800px) {

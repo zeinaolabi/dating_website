@@ -1,7 +1,7 @@
 //Initialize APIs
 const baseURL = "http://127.0.0.1:8001/api/auth/";
 const getChattedWithAPI = "get_chatted_with/";
-const getMessagesAPI = "/get_chat";
+const getMessagesAPI = "get_chat/";
 
 //Initialize variables
 const openHomeBtn = document.getElementById("open_home");
@@ -32,7 +32,6 @@ const viewChattedWith = async () =>{
     axios(baseURL + getChattedWithAPI + userID, config) 
     .then(
         response =>  {
-            console.log(response);
             //Loop over the response
             for(let i = 0; i < response.data.length; i++){
                 
@@ -62,47 +61,32 @@ const viewChattedWith = async () =>{
 }
 
 const openChat = async (event) => {
-    matchModal.style.display = "block";
     const chattedWithID = event.currentTarget.getAttribute("userID");
 
     axios.get(baseURL + getMessagesAPI + userID + "/" + chattedWithID, config)
     .then(response => {
-        //Make a clone of the tweet model
-        let originalModal = document.getElementById("message");
-        let clone = originalModal.cloneNode(true);
-        clone.style.display ="block";
-        clone.id= response.data[0].id;
-        if(response.data[0].sender_id == userID){
-            clone.classList.add("darker");
-        }
+        document.querySelector(".messages").innerHTML = "<div id='message' class='message'><p class='message_content'></p></div>";
 
-        //Get the match's name
-        let matchName = clone.querySelector(".match_name");
-        matchName.textContent = response.data[0].name;
+        for(let i = 0; i < response.data.data.length; i++){
+            //Make a clone of the match model
+            let originalModel = document.querySelector(".message");
+            let clone = originalModel.cloneNode(true);
 
-        //Get the match's bio
-        let matchBio = clone.querySelector(".match_bio");
-        matchBio.textContent = response.data[0].bio;
+            clone.style.display ="block";
+            clone.id= response.data.data[i].id;
+            clone.classList.add("message");
 
-        //Get the match's age
-        let matchAge = clone.querySelector(".match_age");
-        matchAge.textContent = response.data[0].age + " years old";
-
-        //Get the match's profile picture
-        let matchPicture = clone.querySelector(".match_picture");
-        if(response.data[0].image != ""){
-            matchPicture.src = "data:image/png;base64," + response.data[0].image;
-        }
-   
-        //Add div after the original modal
-        originalModal.before(clone);
-        originalModal.style.display = "none";
-
-        window.onclick = function(event) {
-            if (event.target == clone) {
-                clone.style.display = "none";
+            if(response.data.data[i].sender_id == userID){
+                console.log(clone.classList.add("darker"));
             }
-        }
+
+            //Get the user's name
+            let message = clone.querySelector(".message_content");
+            message.textContent = response.data.data[i].message;
+
+            //Add div after the original match
+            originalModel.after(clone);
+            }
         }
     )
 }
