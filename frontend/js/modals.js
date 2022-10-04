@@ -1,23 +1,25 @@
 //Initialize APIs
-const baseURL = "http://127.0.0.1:8001/api/auth/"
+export const baseURL = "http://127.0.0.1:8001/api/auth/"
 const updateProfileAPI = "update_profile";
 const getInfoAPI = "get_profile_info/";
 
 //Initialize variables
-const userID = localStorage.getItem("userID");
+export const userID = localStorage.getItem("userID");
 const openEditModal = document.getElementById("open_edit_modal");
 const openMatchModal = document.getElementById("open_match_modal");
 const openHomeBtn = document.getElementById("open_home");
 const openChatBtn = document.getElementById("open_chat");
 const openFavBtn = document.getElementById("open_fav");
+const openBlockedPage = document.getElementById("open_blocked");
 const editModal = document.getElementById("edit_profile_modal");
-const matchModal = document.getElementById("match_modal");
+export const matchModal = document.getElementById("match_modal");
 const close = document.getElementById("close");
 const close2 = document.getElementById("close2");
 
 const editButton = document.getElementById("edit_profile");
 const locationButton = document.getElementById("location_btn");
 const visibilityButton = document.getElementById("visibility_btn");
+const visibilityStatus = document.getElementById("visibility");
 const newName = document.getElementById("new_name");
 const newBio = document.getElementById("new_bio");
 const getPosition = document.getElementById("demo");
@@ -30,11 +32,17 @@ const addedImage = document.getElementById("added_image");
 const profilePicture = document.querySelector(".profile_picture");
 const name = document.getElementById("name");
 const bio = document.getElementById("bio");
-const visibilityStatus = document.getElementById("visibility");
-const config = {
+const logoutButton = document.getElementById("logout");
+export const config = {
     headers: {
       Authorization: localStorage.getItem("token")
     }
+}
+
+//Remove info from local storage and redirect to login page
+logoutButton.onclick = function() {
+    localStorage.clear();
+    window.location.replace("login_page.html");
 }
 
 // When the user clicks on the button, open the modal
@@ -66,6 +74,10 @@ openChatBtn.onclick = function() {
 
 openFavBtn.onclick = function() {
     window.location.replace("favorites_page.html");
+}
+
+openBlockedPage.onclick = function() {
+    window.location.replace("blocked_page.html");
 }
 
 //When the user clicks anywhere outside of the modal, close it

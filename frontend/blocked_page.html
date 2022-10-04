@@ -42,14 +42,14 @@
                 </ul>
             </header>
 
-            <h1 class="title">Your matches!</h1>
+            <h1 class="title">Blocked Users</h1>
 
             <div class="matches_container">
                 <div class="match" id="open_match_modal">
-                    <img class="match_pictures" src="styles/images/profile.webp">
+                    <img src="styles/images/profile.webp">
                     <div class="match_info">
-                        <h3 class="matchs_name"></h3>
-                        <p class="matchs_bio"></p>
+                        <h3 id="match_name">Another name</h3>
+                        <p id="match_bio">Biooo</p>
                     </div>
                 </div>
             </div>
@@ -110,15 +110,15 @@
 
                     <div class="match_details">
                         <div>
-                            <h2 class="match_name"></h2>
-                            <span class="match_age"></span>
-                            <p class="match_bio"></p>
+                            <h2>Name</h2>
+                            <p><span id="match_age">Age</span></p>
+                            <p class="match_bio" id="match_bio">Bio</p>
                         </div>
 
                         <div class="match_actions">
                             <button class="pink_btn">Message</button>
                             <div class="block_fav">
-                                <button class="transparent_btn action like_button"><img id="like_image" src="styles/images/heart.png"><span id="fav_status"></span></button>
+                                <button class="transparent_btn action"><img src="styles/images/heart.png">Add to favorites</button>
                                 <button class="transparent_btn action"><img src="styles/images/block.png">Block</button>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="js/dropdown_menus.js"></script>
-    <script type="module" src="js/modals.js"></script>
-    <script type="module" src="js/main_script.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/main_script.js"></script>
 </body>
 </html>
