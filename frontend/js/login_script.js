@@ -19,8 +19,11 @@ const newName = document.getElementById("new_name");
 const newEmail = document.getElementById("new_email");
 const newPassword = document.getElementById("new_password");
 const newLocation = document.getElementById("new_address");
-const gender_id = 3;
-const x = document.getElementById("demo");
+const getPosition = document.getElementById("demo");
+const errorCreate = document.getElementById("error_create");
+let gender_id = 3;
+let latitude = "";
+let longitude = "";
 
 //On click, show signup block
 openSignin.onclick = () =>{
@@ -62,20 +65,30 @@ const login = () => {
 }
 
 const createNewAccount = () => {
-    //Save user's data
+
+    //Calculate age
+    const gender = document.querySelector('input[name="gender"]:checked');
     const chosenYear = year.options[year.selectedIndex];
     const currentYear = new Date().getFullYear() ;
-    const age = currentYear - chosenYear.value;
-    const gender = document.querySelector('input[name="gender"]:checked').value;
 
-    var checkedValue = []; 
-    var inputElements = document.getElementsByClassName('interest');
-    for(var i=0; i < inputElements.length; i++){
-          if(inputElements[i].checked){
-               checkedValue.push(inputElements[i].value);
-          }
+    if(chosenYear == null || gender == null || newName == null || 
+        newEmail == null || newPassword == null || longitude == "" || latitude == ""){
+        errorCreate.textContent = "Missing field";
+        return;
+    }
+    
+    const age = currentYear - chosenYear.value;
+
+    //Get the checked values
+    const checkedValue = []; 
+    const inputElements = document.getElementsByClassName('interest');
+    for(let i=0; i < inputElements.length; i++){
+        if(inputElements[i].checked){
+            checkedValue.push(inputElements[i].value);
+        }
     }
 
+    //Save the id of the interested gender
     if(checkedValue.length == 1 && checkedValue[0] == "Female"){
         gender_id = 1
     }
@@ -83,18 +96,19 @@ const createNewAccount = () => {
         gender_id = 2
     }
 
+    //Save user's data
     const data = new FormData();
     data.append("name", newName.value);
     data.append("email", newEmail.value);
     data.append("password", newPassword.value);
     data.append("age", age);
-    data.append("gender", gender);
+    data.append("gender", gender.value);
     data.append("gender_id", gender_id)
     data.append("longitude", longitude);
     data.append("latitude", latitude);
 
     //Send data to the server using axios
-    axios.post(signupAPI, data)
+    axios.post(registerAPI, data)
     .then(
         response =>  {
 
@@ -102,28 +116,32 @@ const createNewAccount = () => {
         localStorage.setItem("userID", response.data.id)
         localStorage.setItem("token", response.data.token)
 
-        //refresh page
-        window.location.replace("landingPage.html");
+        //Redirect to main page
+        window.location.replace("main_page.html");
+        errorCreate.textContent = "";
     })
     .catch((e)=>
         errorCreate.textContent = "Invalid input");
 }
 
-async function getLocation() {
+const getLocation = async () => {
     return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(position => {
-        resolve(showPosition(position)); 
-      } , reject);
+        navigator.geolocation.getCurrentPosition(position => {
+            resolve(showPosition(position)); 
+        } , reject);
     });
 }
   
-function showPosition(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude
-    x.innerHTML = "Latitude: " + latitude + 
+const showPosition = (position) => {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+    getPosition.innerHTML = "Latitude: " + latitude + 
     "<br>Longitude: " + longitude;
 }
 
 loginButton.addEventListener("click", login);
 registerButton.addEventListener("click", createNewAccount);
-locationButton.addEventListener("click", getLocation())
+locationButton.addEventListener("click", (event)=>{
+    getPosition.innerHTML = "Please wait!";
+    getLocation();
+})
