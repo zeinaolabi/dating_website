@@ -6,9 +6,9 @@ const getMatchAPI = "get_match/"
 const isFavoredAPI = "is_favored/";
 const addtoFavAPI = "add_to_favorites";
 const removeFromFavAPI = "remove_from_favorites";
-const isBlockedAPI = "is_favored/";
-const blockAPI = "add_to_favorites";
-const unblockAPI = "remove_from_favorites";
+const isBlockedAPI = "is_blocked/";
+const blockAPI = "block";
+const unblockAPI = "unblock";
 
 //Initialize variables
 
@@ -114,31 +114,35 @@ const openMatch = (event) => {
         }
         )
 
+        // Get like buttons, and save the match id
+        let blockButton = clone.querySelector(".block_button");
+        blockButton.setAttribute('data', response.data[0].id);
+
         //Check if the user is blocked or not
         axios.get(baseURL + isBlockedAPI + userID + "/" + matchID, config)
         .then(response =>{
             //Save the result of the match is liked or not, change the button accordingly
-            likeButton.setAttribute('isLiked', response.data.isLiked);
-            likeButton.querySelector("#like_image").src = response.data.isLiked ? "styles/images/redheart.png" : "/styles/images/heart.png";
-            likeButton.querySelector("#fav_status").textContent = response.data.isLiked ? "Remove from Favorites" : "Add to favorites";
+            blockButton.setAttribute('isBlocked', response.data.isBlocked);
+            blockButton.querySelector("#block_image").src = response.data.isBlocked ? "styles/images/unblock.png" : "/styles/images/block.png";
+            blockButton.querySelector("#block_status").textContent = response.data.isBlocked ? "Unblock" : "Block";
 
             //When like button is clicked, send a request to the server
-            likeButton.addEventListener('click', (event) => {
+            blockButton.addEventListener('click', (event) => {
                 let matchID = event.currentTarget.getAttribute('data');
-                let isLiked = event.currentTarget.getAttribute('isLiked') === "true";
-                let likeAPI = isLiked ? removeFromFavAPI : addtoFavAPI;
+                let isBlocked = event.currentTarget.getAttribute('isBlocked') === "true";
+                let blockingAPI = isBlocked ? unblockAPI : blockAPI;
 
                 const data = new FormData();
-                data.append("favoreduser_id", matchID);
+                data.append("blockeduser_id", matchID);
                 data.append("user_id", userID);
                 
                 //Send data to the server using axios
-                axios.post(baseURL + likeAPI, data, config)
+                axios.post(baseURL + blockingAPI, data, config)
                 .then(response =>  {
                     //Change button image on click
-                    likeButton.setAttribute('isLiked', !isLiked);
-                    likeButton.querySelector("#like_image").src = isLiked ? "/styles/images/heart.png" : "styles/images/redheart.png";
-                    likeButton.querySelector("#fav_status").textContent = isLiked ? "Add to favorites" : "Remove from Favorites";
+                    blockButton.setAttribute('isBlocked', !isBlocked);
+                    blockButton.querySelector("#block_image").src = isBlocked ? "/styles/images/block.png" : "styles/images/unblock.png";
+                    blockButton.querySelector("#block_status").textContent = isBlocked ? "Block" : "Unblock";
                 })
             });
         }
