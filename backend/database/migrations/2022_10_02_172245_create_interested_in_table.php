@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateInterestedInTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('interested_in', function (Blueprint $table) {
@@ -22,11 +17,6 @@ class CreateInterestedInTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('interested_in');

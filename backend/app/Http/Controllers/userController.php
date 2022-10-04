@@ -6,6 +6,7 @@ use App\Models\Block;
 use App\Models\InterestedIn;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class userController extends Controller
@@ -14,12 +15,72 @@ class userController extends Controller
         //Get IDs of blocked &invisible users
         $blockedUsers = Block::where('user_id',$id)->pluck('blockeduser_id');
         $invisibleUsers = User::where("visibility","=",0)->get();
+        $user = User::find($id);
 
         //Get all users that are not blocked/invisible
         $matches = User::select("*")->
         where('id', '<>', $id)->
         whereNotIn('users.id',$blockedUsers)->
-        whereNotIn('users.id', $invisibleUsers)->get();
+        whereNotIn('users.id', $invisibleUsers)->
+        orderBy(DB::raw(
+            'ST_DISTANCE_SPHERE(Point(latitude, longitude), Point('.$user->latitude.','.$user->longitude.'))'
+        ), 'desc')->get();
+
+        //If no results were returned, display an error
+        if($matches->isEmpty()){
+            return response()->json([
+                'status' => "Error",
+                'message' => "No Matches"
+            ], 400);
+        }
+
+        //Send back a json response with the result
+        return response()->json($matches, 201);
+    }
+
+    function getFemaleMatches($id){
+        //Get IDs of blocked &invisible users
+        $blockedUsers = Block::where('user_id',$id)->pluck('blockeduser_id');
+        $invisibleUsers = User::where("visibility","=",0)->get();
+        $user = User::find($id);
+
+        //Get all users that are not blocked/invisible
+        $matches = User::select("*")->
+        where("users.gender", "=", "Female")->
+        where('id', '<>', $id)->
+        whereNotIn('users.id',$blockedUsers)->
+        whereNotIn('users.id', $invisibleUsers)->
+        orderBy(DB::raw(
+            'ST_DISTANCE_SPHERE(Point(latitude, longitude), Point('.$user->latitude.','.$user->longitude.'))'
+        ), 'desc')->get();
+
+        //If no results were returned, display an error
+        if($matches->isEmpty()){
+            return response()->json([
+                'status' => "Error",
+                'message' => "No Matches"
+            ], 400);
+        }
+
+        //Send back a json response with the result
+        return response()->json($matches, 201);
+    }
+
+    function getMaleMatches($id){
+        //Get IDs of blocked &invisible users
+        $blockedUsers = Block::where('user_id',$id)->pluck('blockeduser_id');
+        $invisibleUsers = User::where("visibility","=",0)->get();
+        $user = User::find($id);
+
+        //Get all users that are not blocked/invisible
+        $matches = User::select("*")->
+        where("users.gender", "=", "Male")->
+        where('id', '<>', $id)->
+        whereNotIn('users.id',$blockedUsers)->
+        whereNotIn('users.id', $invisibleUsers)->
+        orderBy(DB::raw(
+            'ST_DISTANCE_SPHERE(Point(latitude, longitude), Point('.$user->latitude.','.$user->longitude.'))'
+        ), 'desc')->get();
 
         //If no results were returned, display an error
         if($matches->isEmpty()){
@@ -53,7 +114,7 @@ class userController extends Controller
     function getBlocked($id){
         //Get all blocked users
         $blockedUsers = User::select("*")->
-            join("blocks", "users.id", "=", "blockeduser_id")->
+        join("blocks", "users.id", "=", "blockeduser_id")->
         where("user_id", "=", $id)->get();
 
         //If no users are blocked, display an error
@@ -95,7 +156,8 @@ class userController extends Controller
     function getProfileInfo($id){
         //Get user's info depending on the ID
         $profileInfo = User::select("*")->
-        where("id", "=", $id)->get();
+        join("interested_in", "users.id", "=", "user_id")->
+        where("users.id", "=", $id)->get();
 
         //If no result were returned, display an error
         if($profileInfo->isEmpty()){
@@ -122,7 +184,7 @@ class userController extends Controller
             'latitude' => 'string',
             'visibility' => 'integer',
             'gender_id' => 'integer',
-            'image' => 'string'
+            'image' => 'string',
         ]);
 
         //If the validator failed, send back an error
@@ -132,7 +194,8 @@ class userController extends Controller
 
         //Get the user info depending on the id, get the interests of the user
         $profile = User::find($request->id);
-        $interests = InterestedIn::where("user_id", "=", $request->gender_id)->get();
+        $id = InterestedIn::where("user_id", "=", $request->id)->get()[0]->id;
+        $interests = InterestedIn::find($id);
 
         //If the user doesn't exist, display an error
         if($profile == null){
@@ -148,7 +211,7 @@ class userController extends Controller
         $profile->longitude = $request->longitude != null ? $request->longitude : $profile->longitude;
         $profile->latitude = $request->latitude != null ? $request->latitude : $profile->latitude;
         $profile->visibility = $request->visibility != null ? $request->visibility : $profile->visibility;
-        $interests->gender_id = $request->gender_id != null ? $request->gender_id : $profile->gender_id;
+        $interests->gender_id = $request->gender_id != null ? $request->gender_id : $interests->gender_id;
 
         if ($request->image) {
             $folderPath = public_path()."/images/";
@@ -169,6 +232,14 @@ class userController extends Controller
                 'message' => 'Unsuccessful Editing',
             ], 400);
         }
+
+        if(!$interests->save()){
+            return response()->json([
+                'message' => 'Unsuccessful Editing',
+            ], 400);
+        }
+
+        $profile->interested_in = $interests->gender_id;
 
         //Return a json response with the data
         return response()->json([
