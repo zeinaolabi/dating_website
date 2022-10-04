@@ -53,8 +53,9 @@ const login = () => {
         }
 
         //Save the token and the user ID on login
+        const token = response.data.token_type + " " + response.data.access_token;
         localStorage.setItem("userID", response.data.user.id)
-        localStorage.setItem("token", response.data.access_token)
+        localStorage.setItem("token", token)
 
         window.location.replace("main_page.html");   
         error.textContent = "";
@@ -112,8 +113,9 @@ const createNewAccount = () => {
         response =>  {
 
         //Save token and ID in the local storage
-        localStorage.setItem("userID", response.data.id)
-        localStorage.setItem("token", response.data.token)
+        const token = response.data.token_type + " " + response.data.access_token;
+        localStorage.setItem("userID", response.data.user.id)
+        localStorage.setItem("token", token)
 
         //Redirect to main page
         window.location.replace("main_page.html");

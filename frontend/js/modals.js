@@ -128,7 +128,7 @@ addedImage.addEventListener('change',()=>{
 
 const getUserInfo = async () =>{
     //Get request to get the users info from the server
-    axios(baseURL + getInfoAPI + userID)
+    axios(baseURL + getInfoAPI + userID, config)
     .then( response =>{
 
         //If a profile image is assigned, display it
