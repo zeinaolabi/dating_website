@@ -1,7 +1,8 @@
 import {matchModal, baseURL, userID, config} from './modals.js';
 
 //Initialize APIs
-const getBlockedAPI = "get_blocked/"
+const getFavsAPI = "get_favorites/"
+const getMatchAPI = "get_match/"
 const isFavoredAPI = "is_favored/";
 const addtoFavAPI = "add_to_favorites";
 const removeFromFavAPI = "remove_from_favorites";
@@ -11,7 +12,7 @@ const unblockAPI = "unblock";
 
 const viewMatches = async () =>{
     // Send the data to the database using POST method
-    axios(baseURL + getBlockedAPI +userID, config) 
+    axios(baseURL + getFavsAPI +userID, config) 
     .then(
         response =>  {
             //Loop over the response
@@ -20,7 +21,7 @@ const viewMatches = async () =>{
                 let originalMatch = document.querySelector(".match");
                 let clone = originalMatch.cloneNode(true);
                 clone.style.display ="block";
-                clone.id= response.data[i].id;
+                clone.id= response.data[i].favoreduser_id;
                 clone.classList.add("match");
 
                 //Get the match's name
@@ -39,7 +40,7 @@ const viewMatches = async () =>{
                 
                 //Add div after the original match
                 originalMatch.after(clone);
-                clone.setAttribute("matchID", response.data[i].id);
+                clone.setAttribute("matchID", response.data[i].favoreduser_id);
                 clone.addEventListener("click", openMatch);
             }
     })
