@@ -1,8 +1,7 @@
 import {matchModal, baseURL, userID, config} from './modals.js';
 
 //Initialize APIs
-const getMatchesAPI = "get_matches/"
-const getMatchAPI = "get_match/"
+const getBlockedAPI = "get_blocked/"
 const isFavoredAPI = "is_favored/";
 const addtoFavAPI = "add_to_favorites";
 const removeFromFavAPI = "remove_from_favorites";
@@ -12,7 +11,7 @@ const unblockAPI = "unblock";
 
 const viewMatches = async () =>{
     // Send the data to the database using POST method
-    axios(baseURL + getMatchesAPI +userID, config) 
+    axios(baseURL + getBlockedAPI +userID, config) 
     .then(
         response =>  {
             //Loop over the response

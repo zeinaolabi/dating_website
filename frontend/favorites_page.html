@@ -14,16 +14,19 @@
             <div class="profile_content">
                 <div class="profile_info">
                     <h1>Cupidie!</h1>
-                    <label><input type="file" id="myfile" name="myfile" hidden>
-                        <img class="profile_picture" src="styles/images/cupid.png"></label>
+                    <label>
+                        <input id="added_image" accept="image/*" type="file" id="actual-btn" multiple hidden/>
+                        <img class="profile_picture" src="styles/images/profile.webp">
+                    </label>
                     <h2 id="name">Name</h2>
                     <p id="bio">Bio</p>
     
                     <button id="open_edit_modal" class="pink_btn editprofile">Edit profile</button>
+                    <button id="open_blocked" class="transparent_btn editprofile">View blocked</button>
                 </div>
                 
                 <div>
-                    <button class="transparent_btn logout">Log out</button>
+                    <button id="logout" class="transparent_btn logout">Log out</button>
                 </div>
             </div>
         </div>
@@ -43,18 +46,10 @@
 
             <div class="matches_container">
                 <div class="match" id="open_match_modal">
-                    <img src="styles/images/cupid.png">
+                    <img class="match_pictures" src="styles/images/profile.webp">
                     <div class="match_info">
-                        <h3 id="match_name">Another name</h3>
-                        <p id="match_bio">Biooo</p>
-                    </div>
-                </div>
-
-                <div class="match">
-                    <img src="styles/images/cupid.png">
-                    <div class="match_info">
-                        <h3 id="match_name">Another name</h3>
-                        <p id="match_bio">Biooo</p>
+                        <h3 class="matchs_name"></h3>
+                        <p class="matchs_bio"></p>
                     </div>
                 </div>
             </div>
@@ -68,8 +63,8 @@
                 <h1>Edit profile</h1>
                 <span id="close" class="close">&times;</span>
             </div>
-            <input type="text" class="textfield" id="name" placeholder="Name">
-            <input type="text" class="textfield bio" id="bio" placeholder="Bio">
+            <input type="text" class="textfield" id="new_name" placeholder="Name">
+            <input type="text" class="textfield bio" id="new_bio" placeholder="Bio">
 
             <!--Drop down menus to be added on JS-->
             <div class="dropdown">
@@ -86,16 +81,17 @@
             </div>
 
             <div class="location">
-                <span>Location: <p class="demo"></p></span>
-                <button class="location_btn">Save your location</button>
+                <span>Location: <p id="demo"></p></span>
+                <button id="location_btn" class="location_btn">Save your location</button>
             </div>
 
             <div class="invisibility_mode">
-                <p>Visibility: <span id="visibility">ON</span></p>
-                <button class="pink_btn visibility_btn">Change visibility</button>
+                <p>Visibility: <span id="visibility"></span></p>
+                <button id="visibility_btn" class="pink_btn visibility_btn">Change visibility</button>
             </div>
 
-            <button class="pink_btn login_btn">Edit</button>
+            <button id="edit_profile" class="pink_btn login_btn">Edit</button>
+            <span class="error" id="error"></span>
         </div>
     </div>
     <!--End of edit profile modal-->
@@ -106,22 +102,23 @@
             <div class="col">
                 <div class="edit_header">
                     <h1>Match Info</h1>
-                    <span id="close2" class="close">&times;</span>
                 </div>
     
                 <div class="match_modal_info">
-                    <img src="styles/images/cupid.png">
+                    <img src="styles/images/profile.webp">
 
                     <div class="match_details">
                         <div>
-                            <h2>Name</h2>
-                            <p><span id="match_age">Age</span></p>
-                            <p class="match_bio" id="match_bio">Bio</p>
+                            <h2 class="match_name"></h2>
+                            <span class="match_age"></span>
+                            <p class="match_bio"></p>
                         </div>
 
                         <div class="match_actions">
                             <button class="pink_btn">Message</button>
-                            <button class="transparent_btn"><img src="styles/images/heart.png">Add to favorites</button>
+                            <div class="block_fav">
+                                <button class="transparent_btn action block_button"><img id="block_image" src="styles/images/block.png"><span id="block_status"></span></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -132,7 +129,7 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="js/dropdown_menus.js"></script>
-    <script src="js/modals.js"></script>
-    <script src="js/main_script.js"></script>
+    <script type="module" src="js/modals.js"></script>
+    <script type="module" src="js/favorites_script.js"></script>
 </body>
 </html>

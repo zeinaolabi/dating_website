@@ -389,9 +389,8 @@ input::placeholder{
 .edit_header{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: space-between;
-    align-content: space-between;
+    justify-content: center;
+    color:#621B07;
     width: 85%;
     margin-bottom: 2vh;
     margin-top: 2vh;

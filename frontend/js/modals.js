@@ -59,10 +59,6 @@ close.onclick = function() {
     editModal.style.display = "none";
 }
 
-close2.onclick = function() {
-    matchModal.style.display = "none";
-}
-
 // When the user clicks on the button, open the given page
 openHomeBtn.onclick = function() {
     window.location.replace("main_page.html");
@@ -130,7 +126,7 @@ addedImage.addEventListener('change',()=>{
     }
 })
 
-const getUserInfo = () =>{
+const getUserInfo = async () =>{
     //Get request to get the users info from the server
     axios(baseURL + getInfoAPI + userID)
     .then( response =>{
@@ -160,7 +156,7 @@ const getUserInfo = () =>{
     })
 }
 
-const updateProfile = () => {
+const updateProfile = async () => {
     //Save user's data
     const data = new FormData();
     data.append("id", userID);
