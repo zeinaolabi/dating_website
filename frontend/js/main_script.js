@@ -6,6 +6,9 @@ const getMatchAPI = "get_match/"
 const isFavoredAPI = "is_favored/";
 const addtoFavAPI = "add_to_favorites";
 const removeFromFavAPI = "remove_from_favorites";
+const isBlockedAPI = "is_favored/";
+const blockAPI = "add_to_favorites";
+const unblockAPI = "remove_from_favorites";
 
 //Initialize variables
 
@@ -81,7 +84,7 @@ const openMatch = (event) => {
         let likeButton = clone.querySelector(".like_button");
         likeButton.setAttribute('data', response.data[0].id);
 
-        //Check if the post is liked or not
+        //Check if the match is liked or not
         axios.get(baseURL + isFavoredAPI + userID + "/" + matchID, config)
         .then(response =>{
             //Save the result of the match is liked or not, change the button accordingly
@@ -111,35 +114,36 @@ const openMatch = (event) => {
         }
         )
 
-        // //Get favorite buttons, and save the product id
-        // let favoriteButton = clone.querySelector(".fav_button");
-        // favoriteButton.setAttribute('data', response.data.id);
+        //Check if the user is blocked or not
+        axios.get(baseURL + isBlockedAPI + userID + "/" + matchID, config)
+        .then(response =>{
+            //Save the result of the match is liked or not, change the button accordingly
+            likeButton.setAttribute('isLiked', response.data.isLiked);
+            likeButton.querySelector("#like_image").src = response.data.isLiked ? "styles/images/redheart.png" : "/styles/images/heart.png";
+            likeButton.querySelector("#fav_status").textContent = response.data.isLiked ? "Remove from Favorites" : "Add to favorites";
 
-        // //Check if the post is favored or not
-        // axios.get(isFavoredAPI + "&product_id=" + response.data.id, config)
-        // .then(response =>{
+            //When like button is clicked, send a request to the server
+            likeButton.addEventListener('click', (event) => {
+                let matchID = event.currentTarget.getAttribute('data');
+                let isLiked = event.currentTarget.getAttribute('isLiked') === "true";
+                let likeAPI = isLiked ? removeFromFavAPI : addtoFavAPI;
 
-        //     //Save the result of the product is favored or not, change the button accordingly
-        //     favoriteButton.setAttribute('isFavored', response.data);
-        //     favoriteButton.querySelector("#fav_image").src = data ? "images/yellowstar" : "images/star.png";
-
-        //     //When favorite button is clicked, send a request to the server
-        //     favoriteButton.addEventListener('click', (event) => {
-        //         let productID = event.currentTarget.getAttribute('data');
-        //         let isFavored = event.currentTarget.getAttribute('isFavored') === "true";
-        //         const wishListAPI = isFavored ? rmFromWishlistAPI : addToWishlistAPI;
-
-        //         //Send data to the server using axios
-        //         axios(wishListAPI + "&product_id=" + productID, config)
-        //         .then(response =>  {
-        //             //Change button image on click
-        //             favoriteButton.setAttribute('isFavored', !isFavored);
-        //             favoriteButton.querySelector("#fav_image").src = isFavored ? "images/star.png" : "images/yellowstar.png";
-        //         })
-        //     });
-        // }
-        // )
-        
+                const data = new FormData();
+                data.append("favoreduser_id", matchID);
+                data.append("user_id", userID);
+                
+                //Send data to the server using axios
+                axios.post(baseURL + likeAPI, data, config)
+                .then(response =>  {
+                    //Change button image on click
+                    likeButton.setAttribute('isLiked', !isLiked);
+                    likeButton.querySelector("#like_image").src = isLiked ? "/styles/images/heart.png" : "styles/images/redheart.png";
+                    likeButton.querySelector("#fav_status").textContent = isLiked ? "Add to favorites" : "Remove from Favorites";
+                })
+            });
+        }
+        )
+   
         //Add div after the original modal
         originalModal.before(clone);
         originalModal.style.display = "none";

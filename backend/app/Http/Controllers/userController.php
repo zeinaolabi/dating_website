@@ -105,7 +105,7 @@ class userController extends Controller
             ], 400);
         }
 
-        $profileInfo->image =  base64_encode($profileInfo->image);
+        $profileInfo[0]->image =  base64_encode(file_get_contents($profileInfo[0]->image));
 
         //Send back a json respone with the result
         return response()->json($profileInfo, 201);
@@ -116,9 +116,10 @@ class userController extends Controller
         $validator = Validator::make($request->all(), [
             'id' => 'required|integer',
             'name' => 'string|between:2,100',
-            'bio' => 'string|max:150',
+            'bio' => 'string|max:100',
             'age' => 'integer',
-            'location' => 'string',
+            'longitude' => 'string',
+            'latitude' => 'string',
             'visibility' => 'integer',
             'gender_id' => 'integer',
             'image' => 'string'
@@ -144,18 +145,22 @@ class userController extends Controller
         $profile->name = $request->name != null ? $request->name : $profile->name;
         $profile->bio = $request->bio != null ? $request->bio : $profile->bio;
         $profile->age = $request->age != null ? $request->age : $profile->age;
-        $profile->location = $request->location != null ? $request->location : $profile->location;
+        $profile->longitude = $request->longitude != null ? $request->longitude : $profile->longitude;
+        $profile->latitude = $request->latitude != null ? $request->latitude : $profile->latitude;
         $profile->visibility = $request->visibility != null ? $request->visibility : $profile->visibility;
         $interests->gender_id = $request->gender_id != null ? $request->gender_id : $profile->gender_id;
 
-        //Get the image and save it in a folder
-        if($request->hasFile('image')){
-            $destination_path = "public/images";
-            $image = base64_decode($request->file('image'));
-            $imageName = $image->getClientOriginalName();
-            $request->file('image')->storeAs($destination_path, $imageName);
+        if ($request->image) {
+            $folderPath = public_path()."/images/";
 
-            $profile->image = $imageName;
+            $base64Image = explode(";base64,", $request->image);
+            $explodeImage = explode("image/", $base64Image[0]);
+            $imageType = $explodeImage[1];
+            $image_base64 = base64_decode($base64Image[1]);
+            $file = $folderPath . uniqid() .'.'. $imageType;
+
+            file_put_contents($file, $image_base64);
+            $profile->image = $file;
         }
 
         //If the new data wasn't saved, send back an error

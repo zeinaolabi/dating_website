@@ -37,7 +37,8 @@ class AuthController extends Controller
             'password' => 'required|string|min:6',
             'age' => 'required|string',
             'gender' => 'required|string|max:6',
-            'location' => 'required|string',
+            'longitude' => 'required|string',
+            'latitude' => 'required|string'
         ]);
 
         //Validate the gender id

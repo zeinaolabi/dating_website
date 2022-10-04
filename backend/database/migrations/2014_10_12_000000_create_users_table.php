@@ -22,7 +22,8 @@ class CreateUsersTable extends Migration
             $table->string("bio", 150)->default("");
             $table->integer("age");
             $table->string("gender");
-            $table->string("location");
+            $table->string("latitude");
+            $table->string("longitude");
             $table->integer("visibility")->default('1');
             $table->timestamps();
         });

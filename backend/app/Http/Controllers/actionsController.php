@@ -209,7 +209,33 @@ class actionsController extends Controller
         //Return a success response
         return response()->json([
             'status' => 'Removed from Favorites',
-        ], 400);
+        ], 201);
+    }
+
+    function isBlocked($id, $match_id){
+        //Check if users exist
+        $userID = User::find($id);
+        $matchID = User::find($match_id);
+
+        //If users don't exist, display an error
+        if($userID == null || $matchID == null){
+            return response()->json([
+                'status' => 'Invalid Users',
+            ], 400);
+        }
+
+        //Check if a certain user is blocked or not
+        $isFavored = Block::select("*")->
+        where([
+            ['user_id', '=', $id],
+            ['blockeduser_id', '=', $match_id],
+        ])->
+        get();
+
+        //Return a json response with a boolean
+        return response()->json([
+            "isBlocked" => !$isFavored->isEmpty()
+        ]);
     }
 
     function block(Request $request){
