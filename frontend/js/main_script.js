@@ -11,6 +11,7 @@ const removeFromFavAPI = "remove_from_favorites";
 const isBlockedAPI = "is_blocked/";
 const blockAPI = "block";
 const unblockAPI = "unblock";
+const sendMessageAPI = "send_message"
 let matchesAPI;
 
 const viewMatches = async () =>{
@@ -123,7 +124,7 @@ const openMatch = async (event) => {
         }
         )
 
-        // Get like buttons, and save the match id
+        // Get block buttons, and save the match id
         let blockButton = clone.querySelector(".block_button");
         blockButton.setAttribute('data', response.data[0].id);
 
@@ -156,6 +157,20 @@ const openMatch = async (event) => {
             });
         }
         )
+
+        let sendMessageButton = clone.querySelector(".sendmessage");
+
+        sendMessageButton.addEventListener("click", (event) => {
+            const data = new FormData();
+            data.append("sender_id", userID);
+            data.append("receiver_id", matchID);
+            data.append("message", "Hi!");
+    
+            axios.post(baseURL + sendMessageAPI, data, config)
+            .then(response => {
+                window.location.replace("chat_page.html");
+            })
+        })
    
         //Add div after the original modal
         originalModal.before(clone);
