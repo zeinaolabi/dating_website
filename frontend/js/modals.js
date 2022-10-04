@@ -1,5 +1,7 @@
 //Initialize APIs
-const updateProfileAPI = "http://127.0.0.1:8001/api/auth/update_profile";
+const baseURL = "http://127.0.0.1:8001/api/auth/"
+const updateProfileAPI = "update_profile";
+const getInfoAPI = "get_profile_info/";
 
 
 //Initialize variables
@@ -15,6 +17,9 @@ const close = document.getElementById("close");
 const close2 = document.getElementById("close2");
 
 const addedImage = document.getElementById("added_image");
+const profilePicture = document.querySelector(".profile_picture");
+const name = document.getElementById("name");
+const bio = document.getElementById("bio");
 const config = {
     headers: {
       Authorization: localStorage.getItem("token")
@@ -78,13 +83,12 @@ addedImage.addEventListener('change',()=>{
         data.append("image", base64Image);
     
         //Send data to the server using axios
-        axios.post(updateProfileAPI, data, config)
+        axios.post(baseURL + updateProfileAPI, data, config)
         .then(
             response =>  {
-                let image = document.querySelector(".profile_picture");
     
                 if(file){
-                    image.src = base64Image;
+                    profilePicture.src = base64Image;
                 }
         })
         .catch((e)=>{
@@ -102,3 +106,27 @@ addedImage.addEventListener('change',()=>{
         reader.readAsDataURL(file);
     }
 })
+
+const getUserInfo = () =>{
+    //Get request to get the users info from the server
+    axios(baseURL + getInfoAPI + userID)
+    .then( response =>{
+
+        //If a profile image is assigned, display it
+        if(response.data[0].image != null){
+            profilePicture.src = 'data:image/png;base64,' + response.data[0].image;
+        }
+
+        //If a name is assigned, display it
+        if(response.data[0].name != null){
+            name.innerText = response.data[0].name;
+        }
+
+        //If a bio is assigned, display it
+        if(response.data[0].bio != null){
+            bio.innerText = response.data[0].bio;
+        }
+    })
+}
+
+getUserInfo();
