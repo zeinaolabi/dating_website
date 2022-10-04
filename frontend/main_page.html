@@ -15,11 +15,12 @@
                 <div class="profile_info">
                     <h1>Cupidie!</h1>
                     <label><input type="file" id="myfile" name="myfile" hidden>
-                        <img class="profile_picture" src="styles/images/cupid.png"></label>
+                        <img class="profile_picture" src="styles/images/profile.webp"></label>
                     <h2 id="name">Name</h2>
                     <p id="bio">Bio</p>
     
                     <button id="open_edit_modal" class="pink_btn editprofile">Edit profile</button>
+                    <button id="open_block" class="transparent_btn editprofile">View blocked</button>
                 </div>
                 
                 <div>
@@ -33,6 +34,7 @@
         <div class="dating_container">
             <header>
                 <ul>
+                    <li><button id="open_home" class="transparent_btn">Home</button></li>
                     <li><button id="open_fav" class="transparent_btn">Favorites</button></li>
                     <li><button id="open_chat" class="transparent_btn">Chat</button></li>
                 </ul>
@@ -42,7 +44,7 @@
 
             <div class="matches_container">
                 <div class="match" id="open_match_modal">
-                    <img src="styles/images/cupid.png">
+                    <img src="styles/images/profile.webp">
                     <div class="match_info">
                         <h3 id="match_name">Another name</h3>
                         <p id="match_bio">Biooo</p>
@@ -50,7 +52,7 @@
                 </div>
 
                 <div class="match">
-                    <img src="styles/images/cupid.png">
+                    <img src="styles/images/profile.webp">
                     <div class="match_info">
                         <h3 id="match_name">Another name</h3>
                         <p id="match_bio">Biooo</p>
@@ -58,51 +60,13 @@
                 </div>
 
                 <div class="match">
-                    <img src="styles/images/cupid.png">
+                    <img src="styles/images/profile.webp">
                     <div class="match_info">
                         <h3 id="match_name">Another name</h3>
                         <p id="match_bio">Biooo</p>
                     </div>
                 </div>
 
-                <div class="match">
-                    <img src="styles/images/cupid.png">
-                    <div class="match_info">
-                        <h3 id="match_name">Another name</h3>
-                        <p id="match_bio">Biooo</p>
-                    </div>
-                </div>
-                <div class="match">
-                    <img src="styles/images/cupid.png">
-                    <div class="match_info">
-                        <h3 id="match_name">Another name</h3>
-                        <p id="match_bio">Biooo</p>
-                    </div>
-                </div> <div class="match">
-                    <img src="styles/images/cupid.png">
-                    <div class="match_info">
-                        <h3 id="match_name">Another name</h3>
-                        <p id="match_bio">Biooo</p>
-                    </div>
-                </div> <div class="match">
-                    <img src="styles/images/cupid.png">
-                    <div class="match_info">
-                        <h3 id="match_name">Another name</h3>
-                        <p id="match_bio">Biooo</p>
-                    </div>
-                </div> <div class="match">
-                    <img src="styles/images/cupid.png">
-                    <div class="match_info">
-                        <h3 id="match_name">Another name</h3>
-                        <p id="match_bio">Biooo</p>
-                    </div>
-                </div> <div class="match">
-                    <img src="styles/images/cupid.png">
-                    <div class="match_info">
-                        <h3 id="match_name">Another name</h3>
-                        <p id="match_bio">Biooo</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -156,7 +120,7 @@
                 </div>
     
                 <div class="match_modal_info">
-                    <img src="styles/images/cupid.png">
+                    <img src="styles/images/profile.webp">
 
                     <div class="match_details">
                         <div>
@@ -167,7 +131,10 @@
 
                         <div class="match_actions">
                             <button class="pink_btn">Message</button>
-                            <button class="transparent_btn"><img src="styles/images/heart.png">Add to favorites</button>
+                            <div class="block_fav">
+                                <button class="transparent_btn action"><img src="styles/images/heart.png">Add to favorites</button>
+                                <button class="transparent_btn action"><img src="styles/images/block.png">Block</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -178,6 +145,7 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="js/dropdown_menus.js"></script>
+    <script src="js/modals.js"></script>
     <script src="js/main_script.js"></script>
 </body>
 </html>
