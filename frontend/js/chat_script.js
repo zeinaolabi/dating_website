@@ -2,11 +2,14 @@
 const baseURL = "http://127.0.0.1:8001/api/auth/";
 const getChattedWithAPI = "get_chatted_with/";
 const getMessagesAPI = "get_chat/";
+const sendMessageAPI = "send_message"
 
 //Initialize variables
 const openHomeBtn = document.getElementById("open_home");
 const openChatBtn = document.getElementById("open_chat");
 const openFavBtn = document.getElementById("open_fav");
+const sendMessageBtn = document.getElementById("send_message");
+const messageToSend = document.getElementById("written_message");
 const userID = localStorage.getItem("userID");
 const config = {
     headers: {
@@ -62,6 +65,7 @@ const viewChattedWith = async () =>{
 
 const openChat = async (event) => {
     const chattedWithID = event.currentTarget.getAttribute("userID");
+    document.getElementById("send_message_container").style.display = "flex";
 
     axios.get(baseURL + getMessagesAPI + userID + "/" + chattedWithID, config)
     .then(response => {
@@ -89,6 +93,22 @@ const openChat = async (event) => {
             }
         }
     )
+
+    sendMessageBtn.addEventListener("click", (event)=>{
+        if(messageToSend.value == null || messageToSend.length > 150){
+            return;
+        }
+
+        const data = new FormData();
+        data.append("sender_id", userID);
+        data.append("receiver_id", chattedWithID);
+        data.append("message", messageToSend.value);
+
+        axios.post(baseURL + sendMessageAPI, data, config)
+        .then(response => {
+            window.location.replace("chat_page.html");
+        })
+    })    
 }
 
 viewChattedWith();

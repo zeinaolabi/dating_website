@@ -603,7 +603,7 @@ input::placeholder{
 .send_message{
     position: fixed;
     bottom: 0;
-    display: flex;
+    display: none;
     flex-direction: row;
     width: 70%;
     height: 4%;
