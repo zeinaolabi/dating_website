@@ -27,6 +27,7 @@ const error = document.getElementById("error");
 let latitude = "";
 let longitude = "";
 let visibility;
+let gender_id;
 
 const addedImage = document.getElementById("added_image");
 const profilePicture = document.querySelector(".profile_picture");
@@ -153,6 +154,8 @@ const getUserInfo = async () =>{
         else{
             visibilityStatus.textContent = "OFF";
         }
+
+        localStorage.setItem("interestedInGender", response.data[0].gender_id)
     })
 }
 
@@ -216,6 +219,8 @@ const updateProfile = async () => {
     axios.post(baseURL + updateProfileAPI, data, config)
     .then(
         response =>  {
+
+        localStorage.setItem("InterestedIn", response.data.user.interested_in);
 
         //Redirect to main page
         window.location.replace("main_page.html");

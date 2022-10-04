@@ -2,6 +2,8 @@ import {matchModal, baseURL, userID, config} from './modals.js';
 
 //Initialize APIs
 const getMatchesAPI = "get_matches/"
+const getFemaleMatches = "get_female_matches/"
+const getMaleMatches = "get_male_matches/"
 const getMatchAPI = "get_match/"
 const isFavoredAPI = "is_favored/";
 const addtoFavAPI = "add_to_favorites";
@@ -9,10 +11,20 @@ const removeFromFavAPI = "remove_from_favorites";
 const isBlockedAPI = "is_blocked/";
 const blockAPI = "block";
 const unblockAPI = "unblock";
+let matchesAPI;
 
 const viewMatches = async () =>{
+    if(localStorage.getItem("interestedInGender") == 1){
+        matchesAPI = getFemaleMatches;
+    }
+    else if(localStorage.getItem("interestedInGender") == 2){
+        matchesAPI = getMaleMatches;
+    }
+    else{
+        matchesAPI = getMatchesAPI;
+    }
     // Send the data to the database using POST method
-    axios(baseURL + getMatchesAPI +userID, config) 
+    axios(baseURL + matchesAPI + userID, config) 
     .then(
         response =>  {
             //Loop over the response
