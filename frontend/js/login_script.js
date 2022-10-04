@@ -18,7 +18,6 @@ const locationButton = document.getElementById("location_btn");
 const newName = document.getElementById("new_name");
 const newEmail = document.getElementById("new_email");
 const newPassword = document.getElementById("new_password");
-const newLocation = document.getElementById("new_address");
 const getPosition = document.getElementById("demo");
 const errorCreate = document.getElementById("error_create");
 let gender_id = 3;

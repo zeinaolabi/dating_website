@@ -3,7 +3,6 @@ const baseURL = "http://127.0.0.1:8001/api/auth/"
 const updateProfileAPI = "update_profile";
 const getInfoAPI = "get_profile_info/";
 
-
 //Initialize variables
 const userID = localStorage.getItem("userID");
 const openEditModal = document.getElementById("open_edit_modal");
@@ -16,10 +15,22 @@ const matchModal = document.getElementById("match_modal");
 const close = document.getElementById("close");
 const close2 = document.getElementById("close2");
 
+const editButton = document.getElementById("edit_profile");
+const locationButton = document.getElementById("location_btn");
+const visibilityButton = document.getElementById("visibility_btn");
+const newName = document.getElementById("new_name");
+const newBio = document.getElementById("new_bio");
+const getPosition = document.getElementById("demo");
+const error = document.getElementById("error");
+let latitude = "";
+let longitude = "";
+let visibility;
+
 const addedImage = document.getElementById("added_image");
 const profilePicture = document.querySelector(".profile_picture");
 const name = document.getElementById("name");
 const bio = document.getElementById("bio");
+const visibilityStatus = document.getElementById("visibility");
 const config = {
     headers: {
       Authorization: localStorage.getItem("token")
@@ -126,7 +137,114 @@ const getUserInfo = () =>{
         if(response.data[0].bio != null){
             bio.innerText = response.data[0].bio;
         }
+
+        visibility = response.data[0].visibility;
+        if(visibility == 1){
+            visibilityStatus.textContent = "ON";
+        }
+        else{
+            visibilityStatus.textContent = "OFF";
+        }
     })
 }
 
+const updateProfile = () => {
+    //Save user's data
+    const data = new FormData();
+    data.append("id", userID);
+
+    if(newName.value != ""){
+        data.append("name", newName.value);
+    }
+
+    if(newBio.value != ""){
+        if(newBio.value.length > 50){
+            error.textContent = "Bio should be less than 50 chars"
+            return;
+        }
+        data.append("bio", newBio.value);
+    }
+
+    //Calculate age
+    const chosenYear = year.options[year.selectedIndex];
+    const currentYear = new Date().getFullYear();
+
+    if(chosenYear.value != "Year"){
+        const age = currentYear - chosenYear.value;
+        data.append("age", age);
+    }
+    
+    //Get the checked values
+    const checkedValue = []; 
+    const inputElements = document.getElementsByClassName('interest');
+    for(let i=0; i < inputElements.length; i++){
+        if(inputElements[i].checked){
+            checkedValue.push(inputElements[i].value);
+        }
+    }
+
+    if(checkedValue.length != 0){
+        //Save the id of the interested gender
+        if(checkedValue.length == 1 && checkedValue[0] == "Female"){
+            gender_id = 1;
+        }
+        else if(checkedValue.length == 1 && checkedValue[0] == "Male"){
+            gender_id = 2;
+        }
+        else{
+            gender_id = 3;
+        }
+        data.append("gender_id", gender_id)
+    }
+
+    if(longitude != "" && latitude != ""){
+        data.append("longitude", longitude);
+        data.append("latitude", latitude);
+    }
+
+    data.append("visibility", visibility);
+
+    //Send data to the server using axios
+    axios.post(baseURL + updateProfileAPI, data, config)
+    .then(
+        response =>  {
+
+        //Redirect to main page
+        window.location.replace("main_page.html");
+        error.textContent = "";
+    })
+    .catch((e)=>
+        error.textContent = "Invalid input");
+}
+
+const getLocation = async () => {
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(position => {
+            resolve(showPosition(position)); 
+        } , reject);
+    });
+}
+  
+const showPosition = (position) => {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+    getPosition.innerHTML = "Latitude: " + latitude + 
+    "<br>Longitude: " + longitude;
+}
+
 getUserInfo();
+editButton.addEventListener("click", updateProfile);
+visibilityButton.addEventListener("click", (event) =>{
+    if(visibility == 1){
+        visibility = 0;
+        visibilityStatus.textContent = "OFF";
+    }
+    else{
+        visibility = 1;
+        visibilityStatus.textContent = "ON";
+    }
+})
+locationButton.addEventListener("click", (event)=>{
+    getPosition.innerHTML = "Please wait!";
+    getLocation();
+})

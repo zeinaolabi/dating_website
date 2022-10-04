@@ -80,8 +80,8 @@
                 <h1>Edit profile</h1>
                 <span id="close" class="close">&times;</span>
             </div>
-            <input type="text" class="textfield" id="name" placeholder="Name">
-            <input type="text" class="textfield bio" id="bio" placeholder="Bio">
+            <input type="text" class="textfield" id="new_name" placeholder="Name">
+            <input type="text" class="textfield bio" id="new_bio" placeholder="Bio">
 
             <!--Drop down menus to be added on JS-->
             <div class="dropdown">
@@ -98,16 +98,17 @@
             </div>
 
             <div class="location">
-                <span>Location: <p class="demo"></p></span>
-                <button class="location_btn">Save your location</button>
+                <span>Location: <p id="demo"></p></span>
+                <button id="location_btn" class="location_btn">Save your location</button>
             </div>
 
             <div class="invisibility_mode">
-                <p>Visibility: <span id="visibility">ON</span></p>
-                <button class="pink_btn visibility_btn">Change visibility</button>
+                <p>Visibility: <span id="visibility"></span></p>
+                <button id="visibility_btn" class="pink_btn visibility_btn">Change visibility</button>
             </div>
 
-            <button class="pink_btn login_btn">Edit</button>
+            <button id="edit_profile" class="pink_btn login_btn">Edit</button>
+            <span class="error" id="error"></span>
         </div>
     </div>
     <!--End of edit profile modal-->
