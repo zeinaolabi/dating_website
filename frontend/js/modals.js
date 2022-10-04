@@ -128,7 +128,6 @@ addedImage.addEventListener('change',()=>{
 })
 
 const getUserInfo = async () =>{
-    //Get request to get the users info from the server
     axios(baseURL + getInfoAPI + userID, config)
     .then( response =>{
 
@@ -147,6 +146,7 @@ const getUserInfo = async () =>{
             bio.innerText = response.data[0].bio;
         }
 
+        //Change the visibility accordingly
         visibility = response.data[0].visibility;
         if(visibility == 1){
             visibilityStatus.textContent = "ON";
@@ -245,7 +245,6 @@ const showPosition = (position) => {
     "<br>Longitude: " + longitude;
 }
 
-getUserInfo();
 editButton.addEventListener("click", updateProfile);
 visibilityButton.addEventListener("click", (event) =>{
     if(visibility == 1){
@@ -261,3 +260,4 @@ locationButton.addEventListener("click", (event)=>{
     getPosition.innerHTML = "Please wait!";
     getLocation();
 })
+getUserInfo();

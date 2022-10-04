@@ -31,14 +31,14 @@ openFavBtn.onclick = function() {
 }
 
 const viewChattedWith = async () =>{
-    // Send the data to the database using POST method
+    // Send the data to the database using axios
     axios(baseURL + getChattedWithAPI + userID, config) 
     .then(
         response =>  {
             //Loop over the response
             for(let i = 0; i < response.data.length; i++){
                 
-                //Make a clone of the match model
+                //Make a clone of the user chat
                 let originalModel = document.querySelector(".user_chat");
                 let clone = originalModel.cloneNode(true);
                 clone.style.display ="flex";
@@ -69,10 +69,11 @@ const openChat = async (event) => {
 
     axios.get(baseURL + getMessagesAPI + userID + "/" + chattedWithID, config)
     .then(response => {
+        //Empty the div each time a new chat is open
         document.querySelector(".messages").innerHTML = "<div id='message' class='message'><p class='message_content'></p></div>";
 
         for(let i = 0; i < response.data.data.length; i++){
-            //Make a clone of the match model
+            //Make a clone of the chat
             let originalModel = document.querySelector(".message");
             let clone = originalModel.cloneNode(true);
 
@@ -80,6 +81,7 @@ const openChat = async (event) => {
             clone.id= response.data.data[i].id;
             clone.classList.add("message");
 
+            //If the message is from the user, add a new style class
             if(response.data.data[i].sender_id == userID){
                 console.log(clone.classList.add("darker"));
             }
@@ -99,6 +101,7 @@ const openChat = async (event) => {
             return;
         }
 
+        //Send message according to the user's input
         const data = new FormData();
         data.append("sender_id", userID);
         data.append("receiver_id", chattedWithID);
@@ -106,6 +109,7 @@ const openChat = async (event) => {
 
         axios.post(baseURL + sendMessageAPI, data, config)
         .then(response => {
+            //Refresh page on response
             window.location.replace("chat_page.html");
         })
     })    

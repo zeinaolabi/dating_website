@@ -125,6 +125,7 @@ const createNewAccount = () => {
         errorCreate.textContent = "Invalid input");
 }
 
+//Get the location using geolocation built in function
 const getLocation = async () => {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(position => {

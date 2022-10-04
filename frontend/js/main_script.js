@@ -65,7 +65,8 @@ const openMatch = async (event) => {
 
     axios.get(baseURL + getMatchAPI + matchID, config)
     .then(response => {
-                 //Make a clone of the tweet model
+
+        //Make a clone of the match modal
         let originalModal = document.getElementById("match_modal");
         let clone = originalModal.cloneNode(true);
         clone.style.display ="block";
@@ -131,12 +132,12 @@ const openMatch = async (event) => {
         //Check if the user is blocked or not
         axios.get(baseURL + isBlockedAPI + userID + "/" + matchID, config)
         .then(response =>{
-            //Save the result of the match is liked or not, change the button accordingly
+            //Save the result of the match is blocked or not, change the button accordingly
             blockButton.setAttribute('isBlocked', response.data.isBlocked);
             blockButton.querySelector("#block_image").src = response.data.isBlocked ? "styles/images/unblock.png" : "/styles/images/block.png";
             blockButton.querySelector("#block_status").textContent = response.data.isBlocked ? "Unblock" : "Block";
 
-            //When like button is clicked, send a request to the server
+            //When block button is clicked, send a request to the server
             blockButton.addEventListener('click', (event) => {
                 let matchID = event.currentTarget.getAttribute('data');
                 let isBlocked = event.currentTarget.getAttribute('isBlocked') === "true";
@@ -161,6 +162,7 @@ const openMatch = async (event) => {
         let sendMessageButton = clone.querySelector(".sendmessage");
 
         sendMessageButton.addEventListener("click", (event) => {
+            //Send a Hi message once the button is clicked
             const data = new FormData();
             data.append("sender_id", userID);
             data.append("receiver_id", matchID);
