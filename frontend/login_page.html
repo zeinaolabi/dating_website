@@ -17,10 +17,11 @@
                 <img src="styles/images/cupid.png">
                 <h1>Login</h1>
                 <input type="text" class="textfield" id="email" placeholder="Email">
-                <input type="text" class="textfield" id="password" placeholder="Password">
+                <input type="password" class="textfield" id="password" placeholder="Password">
 
-                <button class="pink_btn">Login</button>
+                <button class="pink_btn" id="login">Login</button>
                 <span>Don't have an account? <button id="open_signup" class="transparent_btn">Sign up!</button></span>
+                <span class="error" id="error"></span>
             </div>
         </div>
         <!--End of sign in container-->
@@ -30,9 +31,9 @@
             <div class="sign_content">
                 <img src="styles/images/cupid.png">
                 <h1>Sign up</h1>
-                <input type="text" class="textfield" id="name" placeholder="Name">
-                <input type="text" class="textfield" id="email" placeholder="Email">
-                <input type="text" class="textfield" id="password" placeholder="Password">
+                <input type="text" class="textfield" id="new_name" placeholder="Name">
+                <input type="text" class="textfield" id="new_email" placeholder="Email">
+                <input type="password" class="textfield" id="new_password" placeholder="Password">
 
                 <!--Drop down menus to be added on JS-->
                 <div class="dropdown">
@@ -49,18 +50,18 @@
 
                 <div class="radio_buttons">
                     <span>Interested in:</span>
-                    <label><input type="checkbox" id="female" value="Female">Female</label><br>
-                    <label><input type="checkbox" id="male" value="Male">Male</label><br>
-                    <label for="both"><input type="checkbox" id="both" name="both" value="Both">Both</label><br>
+                    <label><input type="checkbox" id="female" class="interest" value="Female">Female</label><br>
+                    <label><input type="checkbox" id="male" class="interest" value="Male">Male</label><br>
                 </div>
 
                 <div class="location">
-                    <span>Location: <p class="demo"></p></span>
-                    <button class="location_btn">Save your location</button>
+                    <span>Location: <p id="demo"></p></span>
+                    <button id="location_btn" class="location_btn">Save your location</button>
                 </div>
 
-                <button class="pink_btn login_btn">Login</button>
+                <button id="create_account" class="pink_btn login_btn">Create Account</button>
                 <span>Already have an account? <button id="open_signin" class="transparent_btn">Sign in!</button></span>
+                <span id="error_create" class="error"></span>
             </div>
         </div>
         <!--End of sign up container-->

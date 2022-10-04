@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/styles.css">
-    <title>Favorites Page</title>
+    <title>Block Page</title>
 </head>
 <body>
 
@@ -42,7 +42,7 @@
                 </ul>
             </header>
 
-            <h1 class="title">Your Favorite Matches!</h1>
+            <h1 class="title">Blocked Users</h1>
 
             <div class="matches_container">
                 <div class="match" id="open_match_modal">
@@ -116,7 +116,6 @@
                         <div class="match_actions">
                             <button class="pink_btn">Message</button>
                             <div class="block_fav">
-                                <button class="transparent_btn action like_button"><img id="like_image" src="styles/images/heart.png"><span id="fav_status"></span></button>
                                 <button class="transparent_btn action block_button"><img id="block_image" src="styles/images/block.png"><span id="block_status"></span></button>
                             </div>
                         </div>
@@ -130,6 +129,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="js/dropdown_menus.js"></script>
     <script type="module" src="js/modals.js"></script>
-    <script type="module" src="js/favorites_script.js"></script>
+    <script type="module" src="js/block_script.js"></script>
 </body>
 </html>

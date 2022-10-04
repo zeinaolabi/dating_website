@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Main Page</title>
+</head>
+<body>
+
+    <div class="main_container">
+        <div class="chating_container">
+            <header>
+                <ul>
+                    <li><button id="open_home" class="transparent_btn">Home</button></li>
+                    <li><button id="open_fav" class="transparent_btn">Favorites</button></li>
+                    <li><button id="open_chat" class="transparent_btn">Chat</button></li>
+                </ul>
+            </header>
+
+            <h1 class="title">Chat</h1>
+
+            <div class="chat_container">
+                <div class="user_chats">
+                    <div class="user_chat">
+                        <img class="user_profile" src="styles/images/profile.webp">
+                        <span class="user_name"></span>
+                    </div>
+                </div>
+
+                <div class="chat" id="chat">
+                    <div class="messages">
+                        <div id="message" class="message"><p class="message_content"></p></div>
+                    </div>
+                    
+                    <div id="send_message_container" class="send_message">
+                        <input id="written_message" type="text" placeholder="Enter your message">
+                        <button id="send_message" class="pink_btn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Start of edit profile modal-->
+    <div id="edit_profile_modal" class="modal">
+        <div class="modal_content">
+            <div class="edit_header">
+                <h1>Edit profile</h1>
+                <span id="close" class="close">&times;</span>
+            </div>
+            <input type="text" class="textfield" id="new_name" placeholder="Name">
+            <input type="text" class="textfield bio" id="new_bio" placeholder="Bio">
+
+            <!--Drop down menus to be added on JS-->
+            <div class="dropdown">
+                <select class="year" id="year"></select>
+                <select class="month" id="month"></select>
+                <select class="day" id="day"></select>
+            </div>
+
+            <div class="radio_buttons">
+                <span>Interested in:</span>
+                <label><input type="checkbox" id="female" value="Female">Female</label><br>
+                <label><input type="checkbox" id="male" value="Male">Male</label><br>
+                <label for="both"><input type="checkbox" id="both" name="both" value="Both">Both</label><br>
+            </div>
+
+            <div class="location">
+                <span>Location: <p id="demo"></p></span>
+                <button id="location_btn" class="location_btn">Save your location</button>
+            </div>
+
+            <div class="invisibility_mode">
+                <p>Visibility: <span id="visibility"></span></p>
+                <button id="visibility_btn" class="pink_btn visibility_btn">Change visibility</button>
+            </div>
+
+            <button id="edit_profile" class="pink_btn login_btn">Edit</button>
+            <span class="error" id="error"></span>
+        </div>
+    </div>
+    <!--End of edit profile modal-->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="js/dropdown_menus.js"></script>
+    <script type="module" src="js/chat_script.js"></script>
+</body>
+</html>

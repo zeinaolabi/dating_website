@@ -1,9 +1,7 @@
 import {matchModal, baseURL, userID, config} from './modals.js';
 
 //Initialize APIs
-const getMatchesAPI = "get_matches/"
-const getFemaleMatches = "get_female_matches/"
-const getMaleMatches = "get_male_matches/"
+const getFavsAPI = "get_favorites/"
 const getMatchAPI = "get_match/"
 const isFavoredAPI = "is_favored/";
 const addtoFavAPI = "add_to_favorites";
@@ -11,21 +9,10 @@ const removeFromFavAPI = "remove_from_favorites";
 const isBlockedAPI = "is_blocked/";
 const blockAPI = "block";
 const unblockAPI = "unblock";
-const sendMessageAPI = "send_message"
-let matchesAPI;
 
 const viewMatches = async () =>{
-    if(localStorage.getItem("interestedInGender") == 1){
-        matchesAPI = getFemaleMatches;
-    }
-    else if(localStorage.getItem("interestedInGender") == 2){
-        matchesAPI = getMaleMatches;
-    }
-    else{
-        matchesAPI = getMatchesAPI;
-    }
-    // Send the data to the database using POST method
-    axios(baseURL + matchesAPI + userID, config) 
+    // Send the data to the database using axios
+    axios(baseURL + getFavsAPI +userID, config) 
     .then(
         response =>  {
             //Loop over the response
@@ -34,7 +21,7 @@ const viewMatches = async () =>{
                 let originalMatch = document.querySelector(".match");
                 let clone = originalMatch.cloneNode(true);
                 clone.style.display ="block";
-                clone.id= response.data[i].id;
+                clone.id= response.data[i].favoreduser_id;
                 clone.classList.add("match");
 
                 //Get the match's name
@@ -53,7 +40,7 @@ const viewMatches = async () =>{
                 
                 //Add div after the original match
                 originalMatch.after(clone);
-                clone.setAttribute("matchID", response.data[i].id);
+                clone.setAttribute("matchID", response.data[i].favoreduser_id);
                 clone.addEventListener("click", openMatch);
             }
     })
@@ -65,7 +52,6 @@ const openMatch = async (event) => {
 
     axios.get(baseURL + getMatchAPI + matchID, config)
     .then(response => {
-
         //Make a clone of the match modal
         let originalModal = document.getElementById("match_modal");
         let clone = originalModal.cloneNode(true);
@@ -125,14 +111,14 @@ const openMatch = async (event) => {
         }
         )
 
-        // Get block buttons, and save the match id
+        // Get like buttons, and save the match id
         let blockButton = clone.querySelector(".block_button");
         blockButton.setAttribute('data', response.data[0].id);
 
         //Check if the user is blocked or not
         axios.get(baseURL + isBlockedAPI + userID + "/" + matchID, config)
         .then(response =>{
-            //Save the result of the match is blocked or not, change the button accordingly
+            //Save the result of the match is block or not, change the button accordingly
             blockButton.setAttribute('isBlocked', response.data.isBlocked);
             blockButton.querySelector("#block_image").src = response.data.isBlocked ? "styles/images/unblock.png" : "/styles/images/block.png";
             blockButton.querySelector("#block_status").textContent = response.data.isBlocked ? "Unblock" : "Block";
@@ -158,21 +144,6 @@ const openMatch = async (event) => {
             });
         }
         )
-
-        let sendMessageButton = clone.querySelector(".sendmessage");
-
-        sendMessageButton.addEventListener("click", (event) => {
-            //Send a Hi message once the button is clicked
-            const data = new FormData();
-            data.append("sender_id", userID);
-            data.append("receiver_id", matchID);
-            data.append("message", "Hi!");
-    
-            axios.post(baseURL + sendMessageAPI, data, config)
-            .then(response => {
-                window.location.replace("chat_page.html");
-            })
-        })
    
         //Add div after the original modal
         originalModal.before(clone);

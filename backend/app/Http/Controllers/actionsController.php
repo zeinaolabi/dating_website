@@ -35,17 +35,6 @@ class actionsController extends Controller
             ], 400);
         }
 
-        $isBlocked = Block::where(
-            ['sender_id', '=', $request->sender_id],
-            ['receiver_id', '=', $request->receiver_id]
-        )->get();
-
-        if(!$isBlocked->isEmpty()){
-            return response()->json([
-                'status' => "Can't Message a Blocked User",
-            ], 400);
-        }
-
         //Create a new message
         Message::create($validator->validated());
 
@@ -56,10 +45,13 @@ class actionsController extends Controller
     }
 
     function getChattedUsers($id){
+        $blockedUsers = Block::where('user_id',$id)->pluck('blockeduser_id');
+
         //Get the users that have been chatted with
-        $chattedUsers = User::select("users.id", "name")->
+        $chattedUsers = User::select("users.id", "name", "image")->
         join("messages", "receiver_id", "=", "users.id")->
-        where('sender_id', $id)->get();
+        where('sender_id', $id)->distinct()->
+        whereNotIn('users.id',$blockedUsers)->get();
 
         //Send back a json response with the result
         return response()->json($chattedUsers);
@@ -78,16 +70,16 @@ class actionsController extends Controller
         }
 
         //Get messages between the two users ordered from oldest to newest
-        $chats = Message::select("message", "messages.created_at")->
+        $chats = Message::select("*")->
         where([
             ['sender_id', '=', $id],
             ['receiver_id', '=', $match_id],
         ])->
         orWhere([
-            ['sender_id', '=', $id],
-            ['receiver_id', '=', $match_id],
+            ['sender_id', '=', $match_id],
+            ['receiver_id', '=', $id],
         ])->
-        orderBy('created_at', 'asc')->
+        orderBy('created_at', 'desc')->
         get();
 
         //Return a json response with the data
@@ -209,7 +201,33 @@ class actionsController extends Controller
         //Return a success response
         return response()->json([
             'status' => 'Removed from Favorites',
-        ], 400);
+        ], 201);
+    }
+
+    function isBlocked($id, $match_id){
+        //Check if users exist
+        $userID = User::find($id);
+        $matchID = User::find($match_id);
+
+        //If users don't exist, display an error
+        if($userID == null || $matchID == null){
+            return response()->json([
+                'status' => 'Invalid Users',
+            ], 400);
+        }
+
+        //Check if a certain user is blocked or not
+        $isBlocked = Block::select("*")->
+        where([
+            ['user_id', '=', $id],
+            ['blockeduser_id', '=', $match_id],
+        ])->
+        get();
+
+        //Return a json response with a boolean
+        return response()->json([
+            "isBlocked" => !$isBlocked->isEmpty()
+        ]);
     }
 
     function block(Request $request){
@@ -296,6 +314,6 @@ class actionsController extends Controller
         //Return a success response
         return response()->json([
             'status' => 'User Unblocked',
-        ], 400);
+        ], 201);
     }
 }

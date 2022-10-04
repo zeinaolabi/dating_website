@@ -18,7 +18,7 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::group([
-    'middleware' => 'api',
+    'middleware' => 'auth:api',
     'prefix' => 'auth'
 ], function () {
     Route::post('/send_message', [actionsController::class, 'sendMessage']);
@@ -27,10 +27,13 @@ Route::group([
     Route::get('/is_favored/{id}/{match_id}', [actionsController::class, 'isFavored']);
     Route::post('/add_to_favorites', [actionsController::class, 'addToFav']);
     Route::post('/remove_from_favorites', [actionsController::class, 'removeFromFav']);
+    Route::get('/is_blocked/{id}/{match_id}', [actionsController::class, 'isBlocked']);
     Route::post('/block', [actionsController::class, 'block']);
     Route::post('/unblock', [actionsController::class, 'unblock']);
 
     Route::get('/get_matches/{id}', [userController::class, 'getMatches']);
+    Route::get('/get_female_matches/{id}', [userController::class, 'getFemaleMatches']);
+    Route::get('/get_male_matches/{id}', [userController::class, 'getMaleMatches']);
     Route::get('/get_match/{match_id}', [userController::class, 'getMatch']);
     Route::get('/get_blocked/{id}', [userController::class, 'getBlocked']);
     Route::get('/get_favorites/{id}', [userController::class, 'getFavorite']);
